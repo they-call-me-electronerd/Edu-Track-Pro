@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -16,51 +16,135 @@
 </head>
 
 <body>
+    <!-- Theme Toggle -->
     <button id="themeToggle" class="theme-btn fixed-theme-btn" aria-label="Toggle Theme">
         <i class="fas fa-moon"></i>
     </button>
+
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="bg-shape shape-1"></div>
+        <div class="bg-shape shape-2"></div>
+        <div class="bg-shape shape-3"></div>
+        <div class="bg-grid"></div>
+    </div>
+
+    <!-- Main Login Container -->
     <div class="login-container">
         <div class="login-card">
+            <!-- Decorative Border Gradient -->
+            <div class="card-border-gradient"></div>
+            
+            <!-- Login Header -->
             <div class="login-header">
-                <div class="logo-icon">
-                    <i class="fas fa-fingerprint"></i>
+                <div class="logo-wrapper">
+                    <div class="logo-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="logo-pulse"></div>
                 </div>
-                <h2>Welcome Back</h2>
-                <p>Enter your credentials to access the system</p>
+                <h1 class="login-title">Edu Track Pro</h1>
+                <h2 class="login-subtitle">Welcome Back</h2>
+                <p class="login-description">Sign in to access your dashboard</p>
             </div>
 
+            <!-- Login Form -->
             <form id="loginForm" class="login-form">
                 <div class="input-group">
-                    <label for="username">ID Number / Username</label>
+                    <label for="username" class="input-label">
+                        <i class="fas fa-user-circle"></i>
+                        ID Number / Username
+                    </label>
                     <div class="input-wrapper">
-                        <i class="fas fa-user"></i>
-                        <input type="text" id="username" placeholder="Enter your ID Number or Username" required>
+                        <div class="input-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <input 
+                            type="text" 
+                            id="username" 
+                            class="input-field"
+                            placeholder="Enter your ID or username" 
+                            required
+                            autocomplete="username">
+                        <div class="input-focus-border"></div>
                     </div>
                 </div>
 
                 <div class="input-group">
-                    <label for="password">Password</label>
-                    <div class="input-wrapper">
+                    <label for="password" class="input-label">
                         <i class="fas fa-lock"></i>
-                        <input type="password" id="password" placeholder="••••••••" required>
-                        <button type="button" class="toggle-password">
+                        Password
+                    </label>
+                    <div class="input-wrapper">
+                        <div class="input-icon">
+                            <i class="fas fa-key"></i>
+                        </div>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            class="input-field"
+                            placeholder="Enter your password" 
+                            required
+                            autocomplete="current-password">
+                        <button type="button" class="toggle-password" aria-label="Toggle password visibility">
                             <i class="fas fa-eye"></i>
                         </button>
+                        <div class="input-focus-border"></div>
                     </div>
                     <div id="login-error" class="error-message"></div>
                 </div>
 
+                <!-- Remember Me & Forgot Password -->
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="rememberMe">
+                        <span class="checkmark"></span>
+                        <span class="remember-text">Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </div>
+
+                <!-- Submit Button -->
                 <button type="submit" class="btn-login-submit">
-                    <span>Sign In</span>
-                    <i class="fas fa-arrow-right"></i>
+                    <span class="btn-text">Sign In</span>
+                    <span class="btn-icon">
+                        <i class="fas fa-arrow-right"></i>
+                    </span>
+                    <div class="btn-shimmer"></div>
                 </button>
+
+                <!-- Divider -->
+                <div class="form-divider">
+                    <span>or continue with</span>
+                </div>
+
+                <!-- Quick Access Info -->
+                <div class="quick-access">
+                    <div class="access-card">
+                        <i class="fas fa-user-graduate"></i>
+                        <span>Student Portal</span>
+                    </div>
+                    <div class="access-card">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Admin Access</span>
+                    </div>
+                </div>
             </form>
+
+            <!-- Footer Info -->
+            <div class="login-footer">
+                <p class="footer-text">
+                    <i class="fas fa-shield-alt"></i>
+                    Secure Login • Protected by 256-bit Encryption
+                </p>
+            </div>
+        </div>
+
+        <!-- Support Info -->
+        <div class="support-info">
+            <p>Need help? Contact <a href="#">support@edutrackpro.com</a></p>
         </div>
     </div>
-
-    <!-- Background Elements -->
-    <div class="bg-glow glow-1"></div>
-    <div class="bg-glow glow-2"></div>
 
     <script src="js/main.js"></script>
     <script src="js/login.js"></script>

@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const usernameInput = document.getElementById('username');
             const passwordInput = document.getElementById('password');
+            const rememberMeCheckbox = document.getElementById('rememberMe');
             const btn = loginForm.querySelector('.btn-login-submit');
             const originalBtnContent = btn.innerHTML;
 
@@ -19,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             errorDiv.classList.remove('visible');
 
             // Loading state
-            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Signing In...';
+            btn.innerHTML = '<span class="btn-text"><i class="fas fa-circle-notch fa-spin"></i> Signing In...</span>';
             btn.style.opacity = '0.8';
             btn.disabled = true;
 
@@ -32,8 +33,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     sessionStorage.setItem('userRole', 'admin');
                     sessionStorage.setItem('adminUsername', username);
                     
+                    // Save username if remember me is checked
+                    if (rememberMeCheckbox && rememberMeCheckbox.checked) {
+                        localStorage.setItem('rememberedUsername', username);
+                    }
+                    
                     // Show success briefly then redirect
-                    btn.innerHTML = '<i class="fas fa-check"></i> Admin Access Granted';
+                    btn.innerHTML = '<span class="btn-text"><i class="fas fa-check"></i> Admin Access Granted</span>';
                     setTimeout(() => {
                         window.location.href = 'admin-dashboard-enhanced.html';
                     }, 500);
@@ -114,13 +120,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     throw new Error('wrong password');
                 }
 
+                // Save username if remember me is checked
+                if (rememberMeCheckbox && rememberMeCheckbox.checked) {
+                    localStorage.setItem('rememberedUsername', username);
+                }
+
                 // Success: set session and redirect
                 sessionStorage.clear();
                 sessionStorage.setItem('isLoggedIn', 'true');
                 sessionStorage.setItem('userRole', 'student');
                 sessionStorage.setItem('studentId', username);
                 
-                btn.innerHTML = '<i class="fas fa-check"></i> Success';
+                btn.innerHTML = '<span class="btn-text"><i class="fas fa-check"></i> Success</span>';
                 setTimeout(() => window.location.href = 'student-dashboard.html', 500);
 
             } catch (error) {
