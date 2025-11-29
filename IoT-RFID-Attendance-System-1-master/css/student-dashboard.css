@@ -1,0 +1,463 @@
+/* Student Dashboard Styles */
+body {
+    padding-top: 70px;
+    /* Adjusted for smaller navbar */
+    overflow-x: hidden;
+}
+
+.dashboard-container {
+    max-width: 1400px;
+    /* Wider container */
+    margin: 0 auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    /* Sidebar + Main Content */
+    gap: 20px;
+    height: calc(100vh - 70px);
+    /* Full height minus navbar */
+}
+
+/* Left Column (Profile + Status) */
+.dashboard-left-col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Right Column (Calendar + Check Date) */
+.dashboard-right-col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.student-profile {
+    background: var(--bg-card);
+    padding: 25px;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+}
+
+.avatar {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: white;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+.info h2 {
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+}
+
+/* Student Details Grid - Compact Vertical */
+.student-details-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    margin-top: 10px;
+    background: var(--bg-surface);
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.student-details-grid p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
+}
+
+.student-details-grid p:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.student-details-grid p i {
+    color: var(--primary-color);
+    width: 20px;
+    text-align: left;
+}
+
+.student-details-grid strong {
+    color: var(--text-dark);
+    margin-right: auto;
+    margin-left: 10px;
+    font-weight: 500;
+}
+
+.attendance-card {
+    background: var(--bg-success-subtle);
+    border: 1px solid var(--border-success-subtle);
+    padding: 20px;
+    border-radius: 12px;
+    color: var(--success);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.attendance-card h3 {
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Calendar Styles - Compact */
+.calendar-section {
+    background: var(--bg-card);
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    flex: 1;
+    /* Take remaining height */
+    display: flex;
+    flex-direction: column;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.calendar-header h3 {
+    font-size: 1.2rem;
+    color: var(--text-dark);
+}
+
+.month-nav button {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    flex: 1;
+}
+
+.calendar-day-header {
+    padding: 5px 0;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.calendar-day {
+    aspect-ratio: auto;
+    /* Remove fixed aspect ratio */
+    height: 100%;
+    min-height: 40px;
+    /* Minimum height */
+    background: var(--bg-surface);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+    border: 1px solid transparent;
+    /* Ensure border is present for status colors */
+    position: relative;
+    color: var(--text-dark);
+}
+
+.calendar-day.present {
+    background: var(--bg-present);
+    /* Increased opacity */
+    border-color: var(--success);
+    color: var(--success);
+    font-weight: 700;
+    box-shadow: 0 0 10px rgba(52, 211, 153, 0.1);
+}
+
+.calendar-day.absent {
+    background: var(--bg-absent);
+    /* Increased opacity */
+    border-color: var(--danger);
+    color: var(--danger);
+    font-weight: 700;
+}
+
+.calendar-day.present::after {
+    display: none;
+}
+
+.calendar-day.absent::after {
+    display: none;
+}
+
+.calendar-legend {
+    margin-top: 15px;
+    font-size: 0.8rem;
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot.present {
+    background: var(--success);
+}
+
+.dot.absent {
+    background: var(--danger);
+}
+
+/* Check Date Section - Horizontal Layout */
+.check-date-section {
+    margin-top: 0;
+    background: var(--bg-card);
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    padding: 20px;
+}
+
+.check-date-section h3 {
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+.date-checker-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.check-date-section .input-group {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.date-input {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    flex: 1;
+    background: var(--bg-input);
+    border: 1px solid var(--border-input);
+    color: var(--text-input);
+    border-radius: 24px;
+    outline: none;
+    transition: all 0.3s ease;
+    min-width: 0;
+    /* Allow flex item to shrink */
+}
+
+.date-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+    background: var(--bg-surface);
+}
+
+.btn-check {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+    border: none;
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-check:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+}
+
+.date-result {
+    padding: 10px 20px;
+    min-height: auto;
+    height: 42px;
+    font-size: 0.9rem;
+    flex: 1;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .dashboard-container {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .dashboard-left-col {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .student-profile,
+    .attendance-card {
+        flex: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-left-col {
+        flex-direction: column;
+    }
+
+    .date-checker-container {
+        flex-direction: column;
+    }
+
+    .date-result {
+        width: 100%;
+    }
+}
+
+/* Light Mode Student Dashboard */
+[data-theme="light"] body {
+    background: var(--background);
+}
+
+[data-theme="light"] .student-profile {
+    background: var(--card-bg);
+    border-color: var(--border);
+    box-shadow: 0 2px 12px rgba(67, 97, 238, 0.08);
+}
+
+[data-theme="light"] .info h2 {
+    color: var(--text);
+}
+
+[data-theme="light"] .student-details-grid {
+    background: rgba(67, 97, 238, 0.03);
+}
+
+[data-theme="light"] .student-details-grid p {
+    color: var(--text-light);
+    border-bottom-color: var(--border);
+}
+
+[data-theme="light"] .student-details-grid strong {
+    color: var(--text);
+}
+
+[data-theme="light"] .attendance-card {
+    background: var(--card-bg);
+    border-color: var(--border);
+    box-shadow: 0 2px 12px rgba(67, 97, 238, 0.08);
+}
+
+[data-theme="light"] .attendance-card h3 {
+    color: var(--text);
+}
+
+[data-theme="light"] .stat {
+    background: rgba(67, 97, 238, 0.03);
+}
+
+[data-theme="light"] .stat h4 {
+    color: var(--text);
+}
+
+[data-theme="light"] .calendar-card {
+    background: var(--card-bg);
+    border-color: var(--border);
+    box-shadow: 0 2px 12px rgba(67, 97, 238, 0.08);
+}
+
+[data-theme="light"] .calendar-card h3 {
+    color: var(--text);
+}
+
+[data-theme="light"] .calendar-header {
+    color: var(--text);
+}
+
+[data-theme="light"] .calendar-days .day {
+    color: var(--text);
+}
+
+[data-theme="light"] .calendar-days .day:hover {
+    background: rgba(67, 97, 238, 0.1);
+}
+
+[data-theme="light"] .calendar-days .day.present {
+    background: rgba(76, 201, 240, 0.15);
+    color: var(--success);
+}
+
+[data-theme="light"] .calendar-days .day.absent {
+    background: rgba(247, 37, 133, 0.15);
+    color: var(--danger);
+}
+
+[data-theme="light"] .date-checker-card {
+    background: var(--card-bg);
+    border-color: var(--border);
+    box-shadow: 0 2px 12px rgba(67, 97, 238, 0.08);
+}
+
+[data-theme="light"] .date-checker-card h3 {
+    color: var(--text);
+}
+
+[data-theme="light"] .date-input {
+    background: var(--bg-input);
+    border-color: var(--border-input);
+    color: var(--text);
+}
+
+[data-theme="light"] .date-input:focus {
+    border-color: var(--primary);
+    background: var(--bg-input);
+}
+
+[data-theme="light"] .date-result {
+    border-color: var(--border);
+    color: var(--text);
+}
+
+[data-theme="light"] .date-result.status-present {
+    background: rgba(76, 201, 240, 0.1);
+    border-color: var(--success);
+}
+
+[data-theme="light"] .date-result.status-absent {
+    background: rgba(247, 37, 133, 0.1);
+    border-color: var(--danger);
+}
