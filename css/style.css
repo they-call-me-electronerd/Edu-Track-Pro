@@ -64,6 +64,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
@@ -73,7 +77,8 @@ body {
         linear-gradient(var(--grid-color) 1px, transparent 1px),
         linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
     background-size: 40px 40px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-x: hidden;
 }
 
 [data-theme="light"] body {
@@ -99,7 +104,7 @@ h6 {
 a {
     text-decoration: none;
     color: inherit;
-    transition: color 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 ul {
@@ -121,9 +126,10 @@ ul {
     border-radius: 8px;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: none;
     font-family: 'Inter', sans-serif;
+    will-change: transform;
 }
 
 .btn-primary {
@@ -574,18 +580,17 @@ ul {
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: titleGlow 3s ease-in-out infinite;
+    animation: fadeInDown 0.8s ease-out;
 }
 
-@keyframes titleGlow {
-
-    0%,
-    100% {
-        filter: drop-shadow(0 0 20px rgba(30, 136, 229, 0.3));
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
     }
-
-    50% {
-        filter: drop-shadow(0 0 30px rgba(30, 136, 229, 0.5));
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
@@ -595,19 +600,6 @@ ul {
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: gradientShift 3s ease infinite;
-}
-
-@keyframes gradientShift {
-
-    0%,
-    100% {
-        filter: brightness(1);
-    }
-
-    50% {
-        filter: brightness(1.2);
-    }
 }
 
 .hero-content p {
@@ -1425,6 +1417,19 @@ ul {
     margin-bottom: 20px;
     color: var(--white);
     text-transform: uppercase;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .underline {
@@ -1570,10 +1575,11 @@ ul {
     padding: 50px;
     border-radius: 16px;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid var(--border-color);
     position: relative;
     overflow: hidden;
+    will-change: transform;
 }
 
 .feature-card::before {
@@ -1594,9 +1600,9 @@ ul {
 }
 
 .feature-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
     border-color: var(--primary-color);
-    box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--primary-color);
 }
 
 .card-icon {
@@ -1614,8 +1620,8 @@ ul {
 
 .feature-card:hover .card-icon {
     background-color: var(--primary-color);
-    transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(59, 130, 246, 0.5);
 }
 
 .card-icon i {
@@ -1692,7 +1698,7 @@ ul {
     border: 1px solid var(--border);
     padding: 40px 30px;
     width: 320px;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
     display: flex;
@@ -1701,6 +1707,7 @@ ul {
     border-radius: 24px;
     text-align: center;
     box-shadow: var(--shadow-md);
+    will-change: transform;
 }
 
 .team-card::before {
@@ -1716,9 +1723,9 @@ ul {
 }
 
 .team-card:hover {
-    transform: translateY(-15px);
+    transform: translateY(-10px);
     border-color: var(--primary);
-    box-shadow: 0 20px 40px -15px rgba(30, 136, 229, 0.3);
+    box-shadow: 0 25px 50px -12px rgba(30, 136, 229, 0.35);
 }
 
 .team-card:hover::before {
@@ -7648,7 +7655,7 @@ ul {
     padding: 36px 28px;
     position: relative;
     overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s ease;
     box-shadow: var(--shadow-sm);
     min-height: 400px;
     display: flex;
@@ -7669,9 +7676,9 @@ ul {
 }
 
 .benefit-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-    border-color: rgba(30, 136, 229, 0.5);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    border-color: rgba(30, 136, 229, 0.4);
 }
 
 .benefit-card:hover::before {
@@ -7691,7 +7698,7 @@ ul {
 }
 
 .benefit-card:hover .benefit-gradient {
-    opacity: 1;
+    opacity: 0.5;
 }
 
 .benefit-icon {
@@ -7703,14 +7710,13 @@ ul {
     align-items: center;
     justify-content: center;
     margin-bottom: 24px;
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: all 0.3s ease;
     box-shadow: 0 8px 16px rgba(30, 136, 229, 0.2);
 }
 
 .benefit-card:hover .benefit-icon {
-    transform: scale(1.15) rotate(-8deg);
-    box-shadow: 0 12px 28px rgba(30, 136, 229, 0.4);
-    background: linear-gradient(135deg, #FF9800 0%, #FFB74D 50%, #FFC107 100%);
+    transform: scale(1.1);
+    box-shadow: 0 12px 24px rgba(30, 136, 229, 0.35);
 }
 
 .benefit-icon i {
@@ -8664,4 +8670,328 @@ ul {
 [data-theme="light"] .social-icons a {
     background: rgba(13, 71, 161, 0.08) !important;
     color: var(--primary) !important;
+}
+
+/* ============================================
+   ADVANCED ANIMATIONS & MICRO-INTERACTIONS
+   ============================================ */
+
+/* Ripple Effect for Cards */
+.ripple-effect {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    width: 100px;
+    height: 100px;
+    margin-left: -50px;
+    margin-top: -50px;
+    animation: ripple-animation 0.6s ease-out;
+    pointer-events: none;
+}
+
+@keyframes ripple-animation {
+    from {
+        transform: scale(0);
+        opacity: 1;
+    }
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Enhanced Float Animation for Tech Visual */
+@keyframes float-enhanced {
+    0%, 100% {
+        transform: translateY(0px) rotateZ(0deg) scale(1);
+    }
+    25% {
+        transform: translateY(-20px) rotateZ(1deg) scale(1.02);
+    }
+    50% {
+        transform: translateY(-15px) rotateZ(-1deg) scale(1.01);
+    }
+    75% {
+        transform: translateY(-25px) rotateZ(0.5deg) scale(1.02);
+    }
+}
+
+.tech-visual {
+    animation: float-enhanced 6s ease-in-out infinite !important;
+}
+
+/* Advanced Shimmer Effect for Floating Card */
+.floating-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.15) 40%,
+        rgba(255, 255, 255, 0.25) 50%,
+        rgba(255, 255, 255, 0.15) 60%,
+        transparent 70%
+    );
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    animation: shimmer-sweep 8s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes shimmer-sweep {
+    0%, 100% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    50% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+}
+
+/* Enhanced Card Photo with Glow */
+.card-photo {
+    animation: photo-pulse 3s ease-in-out infinite;
+}
+
+@keyframes photo-pulse {
+    0%, 100% {
+        box-shadow: 
+            0 8px 16px rgba(0, 0, 0, 0.3),
+            inset 0 2px 4px rgba(255, 255, 255, 0.2);
+    }
+    50% {
+        box-shadow: 
+            0 8px 16px rgba(0, 0, 0, 0.3),
+            inset 0 2px 4px rgba(255, 255, 255, 0.2),
+            0 0 30px rgba(30, 136, 229, 0.4);
+    }
+}
+
+/* Benefit Icon Advanced Animations */
+.benefit-icon {
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    position: relative;
+}
+
+
+
+@keyframes glow-pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+/* Benefit Card Enhanced Transitions */
+.benefit-card {
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+
+
+/* Scroll Fade In Animation */
+.fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Smart Navbar Animations */
+.navbar {
+    transition: transform 0.3s ease-in-out;
+}
+
+.navbar.scroll-down {
+    transform: translateY(-100%);
+}
+
+.navbar.scroll-up {
+    transform: translateY(0);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Enhanced RFID Indicator Animation */
+.rfid-indicator {
+    animation: rfid-pulse 2s ease-in-out infinite;
+}
+
+@keyframes rfid-pulse {
+    0%, 100% {
+        box-shadow: 
+            0 0 10px rgba(34, 197, 94, 0.3),
+            inset 0 0 5px rgba(34, 197, 94, 0.2);
+    }
+    50% {
+        box-shadow: 
+            0 0 25px rgba(34, 197, 94, 0.8),
+            inset 0 0 10px rgba(34, 197, 94, 0.5),
+            0 0 40px rgba(34, 197, 94, 0.4);
+    }
+}
+
+/* Card Chip Enhanced Glow */
+.card-chip {
+    animation: chip-glow-enhanced 3s ease-in-out infinite !important;
+}
+
+@keyframes chip-glow-enhanced {
+    0%, 100% {
+        box-shadow:
+            0 4px 8px rgba(217, 119, 6, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+    33% {
+        box-shadow:
+            0 4px 12px rgba(217, 119, 6, 0.5),
+            inset 0 1px 0 rgba(255, 255, 255, 0.4),
+            0 0 20px rgba(251, 191, 36, 0.4);
+    }
+    66% {
+        box-shadow:
+            0 6px 16px rgba(217, 119, 6, 0.6),
+            inset 0 1px 0 rgba(255, 255, 255, 0.5),
+            0 0 30px rgba(251, 191, 36, 0.5),
+            0 0 40px rgba(251, 191, 36, 0.2);
+    }
+}
+
+/* Student Name Glitch Effect on Hover */
+.student-name {
+    position: relative;
+}
+
+.floating-card:hover .student-name::before,
+.floating-card:hover .student-name::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.floating-card:hover .student-name::before {
+    left: 2px;
+    text-shadow: -2px 0 #42A5F5;
+    animation: glitch-1 0.3s ease-in-out infinite;
+}
+
+.floating-card:hover .student-name::after {
+    left: -2px;
+    text-shadow: 2px 0 #FF9800;
+    animation: glitch-2 0.3s ease-in-out infinite;
+}
+
+@keyframes glitch-1 {
+    0%, 100% {
+        clip-path: inset(40% 0 61% 0);
+    }
+    20% {
+        clip-path: inset(92% 0 1% 0);
+    }
+    40% {
+        clip-path: inset(43% 0 1% 0);
+    }
+    60% {
+        clip-path: inset(25% 0 58% 0);
+    }
+    80% {
+        clip-path: inset(54% 0 7% 0);
+    }
+}
+
+@keyframes glitch-2 {
+    0%, 100% {
+        clip-path: inset(28% 0 71% 0);
+    }
+    20% {
+        clip-path: inset(61% 0 14% 0);
+    }
+    40% {
+        clip-path: inset(6% 0 81% 0);
+    }
+    60% {
+        clip-path: inset(70% 0 27% 0);
+    }
+    80% {
+        clip-path: inset(2% 0 98% 0);
+    }
+}
+
+/* Barcode Scan Animation */
+.barcode {
+    position: relative;
+    overflow: hidden;
+}
+
+.barcode::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(30, 136, 229, 0.3), transparent);
+    animation: scan-effect 3s ease-in-out infinite;
+}
+
+@keyframes scan-effect {
+    0%, 100% {
+        left: -100%;
+    }
+    50% {
+        left: 100%;
+    }
+}
+
+/* Floating Card 3D Transform Enhancement */
+.floating-card {
+    transform-style: preserve-3d;
+    will-change: transform;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Benefit Card Minimal Stagger Animation */
+.benefit-card:nth-child(1) { animation-delay: 0s; }
+.benefit-card:nth-child(2) { animation-delay: 0.05s; }
+.benefit-card:nth-child(3) { animation-delay: 0.1s; }
+.benefit-card:nth-child(4) { animation-delay: 0.15s; }
+.benefit-card:nth-child(5) { animation-delay: 0.2s; }
+.benefit-card:nth-child(6) { animation-delay: 0.25s; }
+.benefit-card:nth-child(7) { animation-delay: 0.3s; }
+.benefit-card:nth-child(8) { animation-delay: 0.35s; }
+
+/* Team Card Hover Enhancement */
+.team-card {
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.team-card:hover {
+    transform: translateY(-10px) scale(1.03) rotateZ(1deg);
+}
+
+/* Feature Card 3D Tilt */
+.feature-card {
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.feature-card:hover {
+    transform: translateY(-8px) scale(1.02);
 }

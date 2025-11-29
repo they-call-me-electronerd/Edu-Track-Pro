@@ -11,13 +11,51 @@ body {
     color: var(--text);
 }
 
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(30, 136, 229, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 152, 0, 0.1) 0%, transparent 50%);
+    z-index: 0;
+    animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+}
+
 /* Background Elements */
 .bg-glow {
     position: absolute;
     border-radius: 50%;
-    filter: blur(80px);
-    z-index: -1;
-    opacity: 0.6;
+    filter: blur(100px);
+    z-index: 1;
+    opacity: 0.5;
+    animation: float 20s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    33% {
+        transform: translate(30px, -30px) scale(1.1);
+    }
+    66% {
+        transform: translate(-30px, 30px) scale(0.9);
+    }
 }
 
 .glow-1 {
@@ -25,7 +63,8 @@ body {
     left: -10%;
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, var(--primary-light) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(30, 136, 229, 0.4) 0%, transparent 70%);
+    animation-delay: 0s;
 }
 
 .glow-2 {
@@ -33,7 +72,8 @@ body {
     right: -10%;
     width: 500px;
     height: 500px;
-    background: radial-gradient(circle, var(--primary-dark) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(255, 152, 0, 0.3) 0%, transparent 70%);
+    animation-delay: 5s;
 }
 
 .login-container {
@@ -45,30 +85,64 @@ body {
 }
 
 .login-card {
-    background: var(--card-bg);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--border);
-    border-radius: 16px;
+    background: rgba(22, 27, 34, 0.8);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
     padding: 48px 40px;
-    box-shadow: var(--shadow-lg);
+    box-shadow: 
+        0 8px 32px 0 rgba(0, 0, 0, 0.37),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
     position: relative;
     overflow: hidden;
-    transition: transform 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: cardSlideIn 0.6s ease-out;
+}
+
+@keyframes cardSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .login-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
+    box-shadow: 
+        0 16px 48px 0 rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
+        0 0 0 1px rgba(30, 136, 229, 0.3);
 }
 
 .login-card::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
+    left: -100%;
+    width: 200%;
     height: 4px;
-    background: linear-gradient(90deg, var(--primary-light), var(--accent-orange));
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--primary-light),
+        var(--accent-orange),
+        transparent
+    );
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
 }
 
 .login-header {
@@ -77,17 +151,45 @@ body {
 }
 
 .logo-icon {
-    width: 64px;
-    height: 64px;
-    background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
-    border-radius: 12px;
+    width: 72px;
+    height: 72px;
+    background: linear-gradient(135deg, #1E88E5, #0D47A1);
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 24px;
-    box-shadow: 0 10px 20px rgba(13, 71, 161, 0.2);
-    font-size: 1.8rem;
+    box-shadow: 
+        0 10px 30px rgba(13, 71, 161, 0.3),
+        0 0 0 8px rgba(30, 136, 229, 0.1);
+    font-size: 2rem;
     color: white;
+    position: relative;
+    animation: iconPulse 3s ease-in-out infinite;
+}
+
+.logo-icon::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, rgba(30, 136, 229, 0.3), rgba(255, 152, 0, 0.3));
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.login-card:hover .logo-icon::after {
+    opacity: 1;
+}
+
+@keyframes iconPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
 }
 
 .login-header h2 {
@@ -131,20 +233,24 @@ body {
 
 .input-wrapper input {
     width: 100%;
-    padding: 12px 16px 12px 44px;
+    padding: 14px 16px 14px 48px;
     background: var(--bg-input);
-    border: 1px solid var(--border-input);
-    border-radius: 8px;
+    border: 2px solid var(--border-input);
+    border-radius: 12px;
     color: var(--text);
     font-size: 1rem;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     font-family: 'Inter', sans-serif;
 }
 
 .input-wrapper input:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.15);
+    background: rgba(30, 136, 229, 0.05);
+    box-shadow: 
+        0 0 0 4px rgba(30, 136, 229, 0.1),
+        0 4px 12px rgba(30, 136, 229, 0.15);
+    transform: translateY(-2px);
 }
 
 .input-wrapper input:focus + i {
@@ -171,26 +277,54 @@ body {
 
 .btn-login-submit {
     width: 100%;
-    padding: 14px;
-    background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
+    padding: 16px;
+    background: linear-gradient(135deg, #1E88E5 0%, #0D47A1 100%);
+    background-size: 200% 200%;
     color: white;
     border: none;
-    border-radius: 8px;
-    font-size: 1rem;
+    border-radius: 12px;
+    font-size: 1.05rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
     margin-top: 10px;
+    box-shadow: 
+        0 4px 15px rgba(30, 136, 229, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-login-submit::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-login-submit:hover::before {
+    left: 100%;
 }
 
 .btn-login-submit:hover {
-    background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(13, 71, 161, 0.3);
+    background: linear-gradient(135deg, #0D47A1 0%, #1E88E5 100%);
+    transform: translateY(-3px);
+    box-shadow: 
+        0 8px 25px rgba(30, 136, 229, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        0 0 20px rgba(30, 136, 229, 0.3);
+}
+
+.btn-login-submit:active {
+    transform: translateY(-1px);
 }
 
 .btn-login-submit i {
@@ -214,24 +348,31 @@ body {
 /* Theme Toggle Position */
 .fixed-theme-btn {
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: 24px;
+    right: 24px;
     z-index: 100;
     background: var(--card-bg);
-    border: 1px solid var(--border);
+    border: 2px solid var(--border);
     color: var(--text);
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: var(--shadow-sm);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .fixed-theme-btn:hover {
-    background: var(--bg-input);
-    transform: rotate(15deg);
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+    transform: rotate(180deg) scale(1.1);
+    box-shadow: 
+        0 8px 20px rgba(30, 136, 229, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
