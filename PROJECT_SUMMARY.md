@@ -4,7 +4,7 @@
 
 **Version**: 3.0  
 **Last Updated**: November 28, 2025  
-**Created By**: Sakshyam Bastakoti | KMC Robotics Club, KMSS Lalitpur
+**Created By**: Sakshyam Bastakoti |
 
 ---
 
@@ -197,9 +197,9 @@ Edit in `css/style.css`:
 
 **Developer**: Sakshyam Bastakoti  
 **Organization**: KMC Robotics Club, KMSS Lalitpur  
-**Email**: sakshyambastakoti@gmail.com  
-**GitHub**: [@sakshyambastakoti](https://github.com/sakshyambastakoti)  
-**YouTube**: [@SakshyamBastakoti](https://www.youtube.com/@SakshyamBastakoti)
+**Email**: sakshyamxeetri@gmail.com  
+**GitHub**: [@sakshyambastakoti](https://github.com/they-call-me-electronerd)  
+**YouTube**: [@SakshyamBastakoti](https://www.youtube.com/@techworldxyz)
 
 **Event**: Tech Expo 2025
 
@@ -239,4 +239,4 @@ Documentation is complete and up-to-date.
 ---
 
 **Thank you for using EduTrack Pro!**  
-Built with ❤️ by KMC Robotics Club
+Built with by sakshyam bastakoti
