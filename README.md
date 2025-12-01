@@ -47,7 +47,7 @@ EduTrack-Pro/
 │   └── admin-dashboard.js          # Admin dashboard logic
 ├── pages/
 │   ├── login.html                  # Unified login page
-│   ├── admin-login.html            # Dedicated admin login
+
 │   ├── student-dashboard.html      # Student portal
 │   └── admin-dashboard.html        # Admin dashboard
 ├── README.md                       # This file
