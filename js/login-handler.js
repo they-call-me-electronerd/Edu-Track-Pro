@@ -19,21 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Prevent default for quick access cards
-    const quickAccessCards = document.querySelectorAll('.access-card');
-    quickAccessCards.forEach(card => {
-        card.addEventListener('click', (e) => {
-            e.preventDefault();
-            const cardType = card.querySelector('span').textContent;
-            console.log(`${cardType} clicked`);
-
-            // Both admin and student login through the same form
-            if (cardType.includes('Admin') || cardType.includes('Student')) {
-                document.getElementById('username').focus();
-            }
-        });
-    });
-
     // Forgot password handler
     const forgotPassword = document.querySelector('.forgot-password');
     if (forgotPassword) {

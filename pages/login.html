@@ -6,13 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Edu Track Pro</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/login.css">
 </head>
 
 <body>
+    <!-- Back to Home -->
+    <a href="../index.html" class="back-to-home" aria-label="Back to Home">
+        <i class="fas fa-arrow-left"></i>
+        <span>Back to Home</span>
+    </a>
+
     <!-- Theme Toggle -->
     <button id="themeToggle" class="theme-btn fixed-theme-btn" aria-label="Toggle Theme">
         <i class="fas fa-moon"></i>
@@ -29,9 +35,6 @@
     <!-- Main Login Container -->
     <div class="login-container">
         <div class="login-card">
-            <!-- Decorative Border Gradient -->
-            <div class="card-border-gradient"></div>
-
             <!-- Login Header -->
             <div class="login-header">
                 <div class="logo-wrapper">
@@ -40,7 +43,7 @@
                     </div>
                     <div class="logo-pulse"></div>
                 </div>
-                <h1 class="login-title">Edu Track Pro</h1>
+                <h1 class="login-title">Edu Track <span>Pro</span></h1>
                 <h2 class="login-subtitle">Welcome Back</h2>
                 <p class="login-description">Sign in to access your dashboard</p>
             </div>
@@ -78,7 +81,6 @@
                         </button>
                         <div class="input-focus-border"></div>
                     </div>
-                    <div id="login-error" class="error-message"></div>
                 </div>
 
                 <!-- Remember Me & Forgot Password -->
@@ -99,37 +101,25 @@
                     </span>
                     <div class="btn-shimmer"></div>
                 </button>
-
-                <!-- Divider -->
-                <div class="form-divider">
-                    <span>or continue with</span>
-                </div>
-
-                <!-- Quick Access Info -->
-                <div class="quick-access">
-                    <div class="access-card">
-                        <i class="fas fa-user-graduate"></i>
-                        <span>Student Portal</span>
-                    </div>
-                    <div class="access-card">
-                        <i class="fas fa-user-shield"></i>
-                        <span>Admin Access</span>
-                    </div>
-                </div>
             </form>
 
             <!-- Footer Info -->
             <div class="login-footer">
                 <p class="footer-text">
                     <i class="fas fa-shield-alt"></i>
-                    Secure Login • Protected by 256-bit Encryption
+                    Secure Login • IoT-Powered RFID System
                 </p>
+                <div class="login-badges">
+                    <span class="badge"><i class="fas fa-lock"></i> Encrypted</span>
+                    <span class="badge"><i class="fas fa-wifi"></i> Real-Time</span>
+                </div>
             </div>
         </div>
 
         <!-- Support Info -->
         <div class="support-info">
             <p>Need help? Contact <a href="#">support@edutrackpro.com</a></p>
+            <p class="project-tag">Tech Expo 2025 • KMSS Robotics Club</p>
         </div>
     </div>
 
