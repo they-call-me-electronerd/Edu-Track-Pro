@@ -16,7 +16,7 @@ EduTrack-Pro/
 ├── 🔐 login.html                      # Unified login (students & admins)
 ├── 👨‍🎓 student-dashboard.html         # Student attendance portal
 ├── 👨‍💼 admin-dashboard-enhanced.html   # Admin control panel
-├── 🔑 admin-login.html                # Alternative admin login
+├── 🔑 login.html                      # Unified login for both admin and students
 ├── 🖼️ kmc_Robotics_Club.png          # KMC Robotics Club logo
 ├── 📖 README.md                       # Complete documentation
 ├── 🚀 QUICKSTART.md                   # Quick start guide
