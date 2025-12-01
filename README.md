@@ -134,7 +134,7 @@ EduTrack-Pro/
 ## 🛠️ Customization
 
 ### Change Admin Credentials
-In `js/login-handler.js` and `pages/admin-login.html`:
+In `js/login-handler.js`:
 ```javascript
 if (username === 'YOUR_USERNAME' && password === 'YOUR_PASSWORD') {
 ```
