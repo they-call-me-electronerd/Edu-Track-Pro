@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const userRole = sessionStorage.getItem('userRole');
     
     if (!isLoggedIn) {
-        window.location.href = 'login.html';
+        window.location.href = 'pages/login.html';
         return;
     }
     

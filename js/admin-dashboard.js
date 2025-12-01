@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function logout() {
     sessionStorage.clear();
-    window.location.href = 'index.html';
+    window.location.href = '../index.html';
 }
 
 function updateDate() {
