@@ -27,9 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const cardType = card.querySelector('span').textContent;
             console.log(`${cardType} clicked`);
 
-            if (cardType.includes('Admin')) {
-                window.location.href = 'admin-login.html';
-            } else if (cardType.includes('Student')) {
+            // Both admin and student login through the same form
+            if (cardType.includes('Admin') || cardType.includes('Student')) {
                 document.getElementById('username').focus();
             }
         });
