@@ -33,27 +33,23 @@ EduTrack Pro is a production-ready IoT-based RFID attendance system with integra
 ```
 EduTrack-Pro/
 ├── index.html                      # Landing page
-├── assets/
-│   └── images/                     # Project images and logos
+├── login.html                      # Unified login (Student & Admin)
+├── student-dashboard.html          # Student portal
+├── admin-dashboard-enhanced.html   # Admin dashboard
 ├── css/
-│   ├── style.css                   # Main styles
-│   ├── login.css                   # Login page styles
-│   ├── student-dashboard.css       # Student styles
-│   └── admin-dashboard.css         # Admin styles
+│   ├── style.css                  # Main styles
+│   ├── login.css                  # Login page styles
+│   ├── student-dashboard.css      # Student styles
+│   └── admin-dashboard.css        # Admin styles
 ├── js/
-│   ├── main.js                     # Common JavaScript
-│   ├── login-handler.js            # Authentication logic
-│   ├── student-dashboard.js        # Student dashboard logic
-│   └── admin-dashboard.js          # Admin dashboard logic
-├── pages/
-│   ├── login.html                  # Unified login page
-│   ├── admin-login.html            # Dedicated admin login
-│   ├── student-dashboard.html      # Student portal
-│   └── admin-dashboard.html        # Admin dashboard
+│   ├── main.js                    # Common JavaScript
+│   ├── login.js                   # Login interactions
+│   ├── loginHandler.js            # Authentication logic
+│   ├── student-dashboard.js       # Student dashboard
+│   └── admin-dashboard.js         # Admin dashboard
+├── kmc_Robotics_Club.png          # Robotics club logo
 ├── README.md                       # This file
-├── QUICKSTART.md                   # Quick start guide
-├── PROJECT_SUMMARY.md              # Detailed project summary
-└── CREDENTIALS.md                  # Credentials information
+└── QUICKSTART.md                   # Quick start guide
 ```
 
 ## 🔐 Login Credentials
@@ -96,13 +92,13 @@ EduTrack-Pro/
 - Team information
 - Responsive design
 
-### 2. Unified Login (`pages/login.html`)
+### 2. Unified Login (`login.html`)
 - Single login page for both students and admins
-- Quick access cards for role selection
+- Automatic routing based on credentials
 - Password visibility toggle
 - Error handling with user-friendly messages
 
-### 3. Student Dashboard (`pages/student-dashboard.html`)
+### 3. Student Dashboard
 **Features:**
 - Profile card with avatar
 - Personal details display
@@ -111,7 +107,7 @@ EduTrack-Pro/
 - Date checker tool
 - "Back to Admin" button (when accessed via admin)
 
-### 4. Admin Dashboard (`pages/admin-dashboard.html`)
+### 4. Admin Dashboard (Enhanced)
 **Dashboard Section:**
 - Total students, Present, Absent, Attendance %
 - Present/Absent students tables
@@ -134,7 +130,7 @@ EduTrack-Pro/
 ## 🛠️ Customization
 
 ### Change Admin Credentials
-In `js/login-handler.js` and `pages/admin-login.html`:
+In `js/loginHandler.js` and `admin-dashboard-enhanced.html`:
 ```javascript
 if (username === 'YOUR_USERNAME' && password === 'YOUR_PASSWORD') {
 ```
@@ -221,6 +217,6 @@ Open source for educational purposes.
 
 ---
 
-**Version**: 3.1  
+**Version**: 3.0  
 **Last Updated**: November 2025  
 **Status**: Production Ready ✅

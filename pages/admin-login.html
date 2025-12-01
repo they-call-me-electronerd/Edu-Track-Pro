@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login - Edu Track Pro</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --primary: #4361ee;
@@ -21,14 +23,14 @@
             --text: #333333;
             --border: #dddfe2;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
         }
-        
+
         body {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
@@ -39,7 +41,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .login-background {
             position: absolute;
             width: 100%;
@@ -50,7 +52,7 @@
             background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.4' d='M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,213.3C1248,235,1344,213,1392,202.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
             background-size: cover;
         }
-        
+
         .login-container {
             display: flex;
             width: 800px;
@@ -63,7 +65,7 @@
             animation: fadeIn 0.8s ease;
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        
+
         .login-left {
             flex: 1;
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 80%);
@@ -76,7 +78,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .login-left::before {
             content: '';
             position: absolute;
@@ -87,7 +89,7 @@
             top: -50px;
             left: -50px;
         }
-        
+
         .login-left::after {
             content: '';
             position: absolute;
@@ -98,19 +100,19 @@
             bottom: -100px;
             right: -100px;
         }
-        
+
         .login-left h2 {
             font-size: 28px;
             margin-bottom: 15px;
             z-index: 1;
         }
-        
+
         .login-left p {
             text-align: center;
             font-size: 16px;
             z-index: 1;
         }
-        
+
         .login-graphic {
             font-size: 150px;
             margin: 30px 0;
@@ -119,7 +121,7 @@
             animation: float 3s ease-in-out infinite;
             filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
         }
-        
+
         .login-right {
             flex: 1;
             display: flex;
@@ -128,25 +130,25 @@
             align-items: center;
             padding: 40px;
         }
-        
+
         .login-right h1 {
             color: var(--primary);
             margin-bottom: 30px;
             font-size: 28px;
         }
-        
+
         .input-group {
             width: 100%;
             margin-bottom: 20px;
         }
-        
+
         .input-group label {
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
             color: var(--dark);
         }
-        
+
         .input-group input {
             width: 100%;
             padding: 15px;
@@ -155,18 +157,18 @@
             font-size: 16px;
             transition: all 0.3s;
         }
-        
+
         .input-group input:focus {
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
         }
-        
+
         .password-container {
             position: relative;
             width: 100%;
         }
-        
+
         .toggle-password {
             position: absolute;
             right: 15px;
@@ -175,7 +177,7 @@
             cursor: pointer;
             color: #6c757d;
         }
-        
+
         .login-btn {
             width: 100%;
             padding: 15px;
@@ -191,29 +193,29 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .login-btn:hover {
             background: var(--secondary);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-        
+
         .login-btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
         }
-        
+
         .back-link {
             margin-top: 20px;
             font-size: 14px;
         }
-        
+
         .back-link a {
             color: var(--primary);
             text-decoration: none;
             font-weight: 600;
         }
-        
+
         .error-message {
             color: var(--danger);
             margin-top: 15px;
@@ -224,22 +226,37 @@
             background: rgba(247, 37, 133, 0.1);
             border-radius: 8px;
         }
-        
+
         .error-message.visible {
             display: block;
         }
-        
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        
+
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
         }
-        
+
         @media (max-width: 768px) {
             .login-container {
                 flex-direction: column;
@@ -247,11 +264,11 @@
                 width: 95%;
                 max-width: 500px;
             }
-            
+
             .login-left {
                 padding: 30px;
             }
-            
+
             .login-graphic {
                 font-size: 80px;
                 margin: 20px 0;
@@ -259,6 +276,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="login-background"></div>
     <div class="login-container">
@@ -285,7 +303,7 @@
             <button class="login-btn" id="loginBtn">Sign in</button>
             <div class="error-message" id="errorMessage">Invalid username or password.</div>
             <div class="back-link">
-                <a href="index.html"><i class="fas fa-arrow-left"></i> Back to Home</a>
+                <a href="../index.html"><i class="fas fa-arrow-left"></i> Back to Home</a>
             </div>
         </div>
     </div>
@@ -299,7 +317,7 @@
             const errorMessage = document.getElementById('errorMessage');
 
             // Toggle password visibility
-            togglePassword.addEventListener('click', function() {
+            togglePassword.addEventListener('click', function () {
                 const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
                 passwordInput.setAttribute('type', type);
                 this.querySelector('i').classList.toggle('fa-eye');
@@ -318,9 +336,9 @@
             function handleLogin() {
                 const username = usernameInput.value.trim();
                 const password = passwordInput.value.trim();
-                
+
                 errorMessage.classList.remove('visible');
-                
+
                 if (!username || !password) {
                     errorMessage.textContent = 'Please enter both username and password.';
                     errorMessage.classList.add('visible');
@@ -331,17 +349,17 @@
                 if (username === 'admin' && password === 'admin123') {
                     loginBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Signing in...';
                     loginBtn.disabled = true;
-                    
+
                     sessionStorage.setItem('isLoggedIn', 'true');
                     sessionStorage.setItem('userRole', 'admin');
-                    
+
                     setTimeout(() => {
-                        window.location.href = 'admin-dashboard-enhanced.html';
+                        window.location.href = 'admin-dashboard.html';
                     }, 800);
                 } else {
                     errorMessage.textContent = 'Invalid username or password.';
                     errorMessage.classList.add('visible');
-                    
+
                     // Shake animation
                     const container = document.querySelector('.login-container');
                     container.style.animation = 'none';
@@ -353,4 +371,5 @@
         });
     </script>
 </body>
+
 </html>

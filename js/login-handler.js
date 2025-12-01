@@ -1,4 +1,86 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // ============================================
+    // UI INTERACTIONS & VISUAL EFFECTS
+    // ============================================
+
+    // Password Toggle
+    const togglePassword = document.querySelector('.toggle-password');
+    const passwordInput = document.querySelector('#password');
+
+    if (togglePassword && passwordInput) {
+        togglePassword.addEventListener('click', function () {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            // Toggle icon
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-eye');
+            icon.classList.toggle('fa-eye-slash');
+        });
+    }
+
+    // Prevent default for quick access cards
+    const quickAccessCards = document.querySelectorAll('.access-card');
+    quickAccessCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            e.preventDefault();
+            const cardType = card.querySelector('span').textContent;
+            console.log(`${cardType} clicked`);
+
+            if (cardType.includes('Admin')) {
+                window.location.href = 'admin-login.html';
+            } else if (cardType.includes('Student')) {
+                document.getElementById('username').focus();
+            }
+        });
+    });
+
+    // Forgot password handler
+    const forgotPassword = document.querySelector('.forgot-password');
+    if (forgotPassword) {
+        forgotPassword.addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Password recovery feature coming soon!');
+        });
+    }
+
+    // Remember me functionality
+    const rememberMeCheckbox = document.querySelector('#rememberMe');
+    if (rememberMeCheckbox) {
+        // Load saved preference
+        const savedUsername = localStorage.getItem('rememberedUsername');
+        if (savedUsername) {
+            const usernameInput = document.querySelector('#username');
+            if (usernameInput) {
+                usernameInput.value = savedUsername;
+                rememberMeCheckbox.checked = true;
+            }
+        }
+
+        // Save preference on change
+        rememberMeCheckbox.addEventListener('change', function () {
+            if (!this.checked) {
+                localStorage.removeItem('rememberedUsername');
+            }
+        });
+    }
+
+    // Add input animations
+    const inputFields = document.querySelectorAll('.input-field');
+    inputFields.forEach(input => {
+        input.addEventListener('focus', function () {
+            this.parentElement.classList.add('focused');
+        });
+
+        input.addEventListener('blur', function () {
+            this.parentElement.classList.remove('focused');
+        });
+    });
+
+    // ============================================
+    // LOGIN AUTHENTICATION LOGIC
+    // ============================================
+
     const loginForm = document.getElementById('loginForm');
 
     if (loginForm) {
@@ -32,16 +114,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     sessionStorage.setItem('isLoggedIn', 'true');
                     sessionStorage.setItem('userRole', 'admin');
                     sessionStorage.setItem('adminUsername', username);
-                    
+
                     // Save username if remember me is checked
                     if (rememberMeCheckbox && rememberMeCheckbox.checked) {
                         localStorage.setItem('rememberedUsername', username);
                     }
-                    
+
                     // Show success briefly then redirect
                     btn.innerHTML = '<span class="btn-text"><i class="fas fa-check"></i> Admin Access Granted</span>';
                     setTimeout(() => {
-                        window.location.href = 'admin-dashboard-enhanced.html';
+                        window.location.href = 'admin-dashboard.html';
                     }, 500);
                     return;
                 }
@@ -130,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 sessionStorage.setItem('isLoggedIn', 'true');
                 sessionStorage.setItem('userRole', 'student');
                 sessionStorage.setItem('studentId', username);
-                
+
                 btn.innerHTML = '<span class="btn-text"><i class="fas fa-check"></i> Success</span>';
                 setTimeout(() => window.location.href = 'student-dashboard.html', 500);
 
