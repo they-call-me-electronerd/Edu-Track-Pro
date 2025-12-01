@@ -1,98 +1,83 @@
 /* Student Dashboard Styles */
-body {
-    padding-top: 80px;
+body { 
+    padding-top: 70px; /* Adjusted for smaller navbar */
     overflow-x: hidden;
-    background-color: var(--background);
 }
 
-.dashboard-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 24px;
+.dashboard-container { 
+    max-width: 1400px; /* Wider container */
+    margin: 0 auto; 
+    padding: 20px; 
     display: grid;
-    grid-template-columns: 360px 1fr;
-    gap: 24px;
-    min-height: calc(100vh - 80px);
+    grid-template-columns: 350px 1fr; /* Sidebar + Main Content */
+    gap: 20px;
+    height: calc(100vh - 70px); /* Full height minus navbar */
 }
 
 /* Left Column (Profile + Status) */
 .dashboard-left-col {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
 }
 
 /* Right Column (Calendar + Check Date) */
 .dashboard-right-col {
     display: flex;
     flex-direction: column;
-    gap: 24px;
-}
-
-/* Cards Common Style */
-.student-profile, .attendance-card, .check-date-section, .calendar-section {
-    background: var(--card-bg);
-    border-radius: 16px;
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow-sm);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.student-profile:hover, .attendance-card:hover, .check-date-section:hover, .calendar-section:hover {
-    box-shadow: var(--shadow-md);
-}
-
-/* Profile Card */
-.student-profile {
-    padding: 32px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
     gap: 20px;
 }
 
-.avatar {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
-    border-radius: 50%;
-    display: flex;
+.student-profile { 
+    background: var(--bg-card); 
+    padding: 25px; 
+    border-radius: 16px; 
+    border: 1px solid var(--border-color); 
+    display: flex; 
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    color: white;
-    box-shadow: 0 8px 24px rgba(13, 71, 161, 0.25);
-    border: 4px solid var(--card-bg);
+    text-align: center;
+    gap: 15px; 
 }
 
-.info h2 {
-    margin-bottom: 8px;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--text);
+.avatar { 
+    width: 70px; 
+    height: 70px; 
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-size: 1.8rem; 
+    color: white; 
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
 }
 
+.info h2 { 
+    margin-bottom: 5px; 
+    font-size: 1.2rem;
+}
+
+/* Student Details Grid - Compact Vertical */
 .student-details-grid {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
     width: 100%;
-    margin-top: 16px;
-    background: var(--bg-input);
-    padding: 20px;
+    margin-top: 10px;
+    background: var(--bg-surface);
+    padding: 15px;
     border-radius: 12px;
-    border: 1px solid var(--border);
 }
 
 .student-details-grid p {
-    color: var(--text-muted);
-    font-size: 0.95rem;
+    color: var(--text-light);
+    font-size: 0.9rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
 }
 
 .student-details-grid p:last-child {
@@ -101,22 +86,25 @@ body {
 }
 
 .student-details-grid p i {
-    color: var(--primary);
-    width: 24px;
+    color: var(--primary-color);
+    width: 20px;
     text-align: left;
 }
 
 .student-details-grid strong {
-    color: var(--text);
+    color: var(--text-dark);
     margin-right: auto;
-    font-weight: 600;
+    margin-left: 10px;
+    font-weight: 500;
 }
 
-/* Attendance Status Card */
-.attendance-card {
-    padding: 24px;
-    text-align: center;
-    background: linear-gradient(135deg, var(--card-bg) 0%, var(--bg-input) 100%);
+.attendance-card { 
+    background: var(--bg-success-subtle); 
+    border: 1px solid var(--border-success-subtle); 
+    padding: 20px; 
+    border-radius: 12px; 
+    color: var(--success); 
+    text-align: center; 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -125,110 +113,20 @@ body {
 }
 
 .attendance-card h3 {
-    font-size: 1.1rem;
-    color: var(--text);
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.attendance-card h3 i {
-    color: var(--success);
-}
-
-#todayStatusText {
-    font-weight: 700;
-    font-size: 1.25rem;
-    margin-top: 12px;
-    padding: 8px 16px;
-    border-radius: 8px;
-    display: inline-block;
-}
-
-.status-present {
-    color: var(--success);
-    background: rgba(46, 160, 67, 0.1);
-    border: 1px solid rgba(46, 160, 67, 0.2);
-}
-
-.status-absent {
-    color: var(--danger);
-    background: rgba(218, 54, 51, 0.1);
-    border: 1px solid rgba(218, 54, 51, 0.2);
-}
-
-/* Check Date Section */
-.check-date-section {
-    padding: 24px;
-}
-
-.check-date-section h3 {
-    font-size: 1.1rem;
-    margin-bottom: 16px;
+    font-size: 1rem;
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-.check-date-section h3 i {
-    color: var(--accent);
-}
-
-.date-checker-container {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.input-group {
-    display: flex;
-    gap: 12px;
-}
-
-.date-input {
-    flex: 1;
-    padding: 10px 16px;
-    border-radius: 8px;
-    border: 1px solid var(--border-input);
-    background: var(--bg-input);
-    color: var(--text);
-    font-family: 'Inter', sans-serif;
-}
-
-.btn-check {
-    padding: 10px 20px;
-    background: var(--primary);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.btn-check:hover {
-    background: var(--accent);
-    transform: translateY(-2px);
-}
-
-.date-result {
-    padding: 16px;
-    border-radius: 8px;
-    background: var(--bg-input);
-    text-align: center;
-    min-height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--border);
-}
-
-/* Calendar Section */
+/* Calendar Styles - Compact */
 .calendar-section {
-    padding: 32px;
-    flex: 1;
+    background: var(--bg-card);
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    flex: 1; /* Take remaining height */
     display: flex;
     flex-direction: column;
 }
@@ -237,140 +135,248 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 24px;
+    margin-bottom: 15px;
 }
 
 .calendar-header h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--text-dark);
 }
 
 .month-nav {
     display: flex;
-    gap: 8px;
+    gap: 10px;
 }
 
 .month-nav button {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    color: var(--text-light);
     border-radius: 8px;
-    border: 1px solid var(--border);
-    background: var(--bg-input);
-    color: var(--text);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .month-nav button:hover {
-    background: var(--primary);
+    background: var(--primary-color);
     color: white;
-    border-color: var(--primary);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
 }
 
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 12px;
+    gap: 8px;
     flex: 1;
 }
 
 .calendar-day-header {
-    text-align: center;
-    font-weight: 600;
-    color: var(--text-muted);
-    padding-bottom: 12px;
-    font-size: 0.9rem;
+    padding: 5px 0;
+    font-size: 0.8rem;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
 }
 
 .calendar-day {
-    aspect-ratio: 1;
-    border-radius: 12px;
-    background: var(--bg-input);
-    border: 1px solid var(--border);
+    aspect-ratio: auto; /* Remove fixed aspect ratio */
+    height: 100%;
+    min-height: 40px; /* Minimum height */
+    background: var(--bg-surface);
+    border-radius: 6px;
+    font-size: 0.9rem;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--text);
+    cursor: default;
+    border: 1px solid transparent; /* Ensure border is present for status colors */
     position: relative;
-    transition: all 0.3s ease;
-    cursor: default;
-}
-
-.calendar-day:hover {
-    transform: scale(1.05);
-    z-index: 2;
-    border-color: var(--primary);
-}
-
-.calendar-day.empty {
-    background: transparent;
-    border: none;
-    cursor: default;
+    color: var(--text-dark);
 }
 
 .calendar-day.present {
-    background: rgba(46, 160, 67, 0.15);
-    border-color: rgba(46, 160, 67, 0.3);
+    background: var(--bg-present); /* Increased opacity */
+    border-color: var(--success);
     color: var(--success);
+    font-weight: 700;
+    box-shadow: 0 0 10px rgba(52, 211, 153, 0.1);
+}
+
+.calendar-day.absent {
+    background: var(--bg-absent); /* Increased opacity */
+    border-color: var(--danger);
+    color: var(--danger);
+    font-weight: 700;
 }
 
 .calendar-day.present::after {
-    content: 'P';
-    font-size: 0.7rem;
-    font-weight: 700;
-    margin-top: 4px;
+    display: none;
 }
 
 .calendar-day.absent::after {
-    content: 'A';
-    font-size: 0.7rem;
-    font-weight: 700;
-    margin-top: 4px;
+    display: none;
 }
 
-.calendar-day.today {
-    border: 2px solid var(--accent);
-    box-shadow: 0 0 12px rgba(255, 152, 0, 0.2);
+/* Admin clickable calendar days */
+.calendar-day[style*="cursor: pointer"]:hover {
+    transform: scale(1.15);
+    box-shadow: 0 4px 12px rgba(91, 123, 233, 0.3);
+    border-color: var(--primary-color);
+}
+
+.calendar-day[style*="cursor: pointer"].present:hover {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.calendar-day[style*="cursor: pointer"].absent:hover,
+.calendar-day[style*="cursor: pointer"]:not(.present):not(.absent):hover {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.calendar-legend {
+    margin-top: 15px;
+    font-size: 0.8rem;
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot.present { background: var(--success); }
+.dot.absent { background: var(--danger); }
+
+/* Check Date Section - Horizontal Layout */
+.check-date-section {
+    margin-top: 0;
+    background: var(--bg-card);
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    padding: 20px;
+}
+
+.check-date-section h3 {
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+.date-checker-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.check-date-section .input-group {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.date-input {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    flex: 1;
+    background: var(--bg-input);
+    border: 1px solid var(--border-input);
+    color: var(--text-input);
+    border-radius: 8px;
+    outline: none;
+    transition: all 0.3s ease;
+    min-width: 0; /* Allow flex item to shrink */
+}
+
+.date-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+    background: var(--bg-surface);
+}
+
+.btn-check {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-check:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+}
+
+.date-result {
+    padding: 12px 20px;
+    min-height: auto;
+    font-size: 0.95rem;
+    flex: 1;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: var(--text-light);
+    transition: all 0.3s ease;
+}
+
+.date-result.present {
+    background: var(--bg-present);
+    border-color: var(--success);
+    color: var(--success);
+    box-shadow: 0 0 15px rgba(52, 211, 153, 0.1);
+}
+
+.date-result.absent {
+    background: var(--bg-absent);
+    border-color: var(--danger);
+    color: var(--danger);
+    box-shadow: 0 0 15px rgba(248, 113, 113, 0.1);
+}
+
+.date-result i {
+    font-size: 1.1rem;
 }
 
 /* Responsive */
 @media (max-width: 1024px) {
     .dashboard-container {
         grid-template-columns: 1fr;
+        height: auto;
     }
     
     .dashboard-left-col {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
-}
-
-@media (max-width: 768px) {
-    .dashboard-left-col {
-        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
     }
     
-    .calendar-grid {
-        gap: 6px;
-    }
-    
-    .calendar-day {
-        font-size: 0.9rem;
-        border-radius: 8px;
-    }
-}
-
-
-    .student-profile,
-    .attendance-card {
+    .student-profile, .attendance-card {
         flex: 1;
     }
 }
@@ -379,27 +385,68 @@ body {
     .dashboard-left-col {
         flex-direction: column;
     }
-
+    
     .date-checker-container {
         flex-direction: column;
     }
-
+    
     .date-result {
         width: 100%;
     }
 }
 
-/* Light Mode Student Dashboard */
-[data-theme="light"] body {
-    background: var(--background);
+/* Animations & Visuals */
+.student-profile {
+    position: relative;
+    overflow: hidden;
 }
 
-[data-theme="light"] .student-profile {
-    background: var(--card-bg);
-    border-color: var(--border);
+.profile-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+    animation: rotate-glow 10s linear infinite;
+    pointer-events: none;
+}
 
+@keyframes rotate-glow {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 
-[data-theme="light"] .date-result.status-absent {
-    background: rgba(247, 37, 133, 0.1);
-    border-color: var(--danger);
+#confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #f00;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to { transform: translateY(100vh) rotate(720deg); }
+}
+
+/* Calendar Animation */
+.calendar-day {
+    opacity: 0;
+    animation: fade-in-up 0.5s forwards;
+}
+
+@keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
