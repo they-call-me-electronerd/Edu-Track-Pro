@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const userRole = sessionStorage.getItem('userRole');
     
     if (!isLoggedIn) {
-        window.location.href = 'pages/login.html';
+        window.location.href = 'login.html';
         return;
     }
     
@@ -106,7 +106,7 @@ function logout() {
     } else {
         // Regular student logout
         sessionStorage.clear();
-        window.location.href = 'index.html';
+        window.location.href = '../index.html';
     }
 }
 
