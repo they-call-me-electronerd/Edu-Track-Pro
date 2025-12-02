@@ -583,30 +583,183 @@
             </div>
 
             <div class="tech-categories">
+                <!-- Frontend Category -->
                 <div class="tech-category">
-                    <h3><i class="fas fa-laptop-code"></i> Frontend</h3>
+                    <div class="tech-category-header">
+                        <div class="tech-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div class="tech-header-content">
+                            <h3>Frontend</h3>
+                            <p class="tech-description">Modern web technologies</p>
+                        </div>
+                    </div>
                     <div class="tech-items">
-                        <div class="tech-item"><i class="fab fa-html5"></i> HTML5</div>
-                        <div class="tech-item"><i class="fab fa-css3-alt"></i> CSS3</div>
-                        <div class="tech-item"><i class="fab fa-js"></i> JavaScript</div>
+                        <div class="tech-item" data-tech="html">
+                            <div class="tech-item-icon">
+                                <i class="fab fa-html5"></i>
+                            </div>
+                            <div class="tech-item-content">
+                                <strong>HTML5</strong>
+                                <span>Semantic markup</span>
+                            </div>
+                        </div>
+                        <div class="tech-item" data-tech="css">
+                            <div class="tech-item-icon">
+                                <i class="fab fa-css3-alt"></i>
+                            </div>
+                            <div class="tech-item-content">
+                                <strong>CSS3</strong>
+                                <span>Modern styling</span>
+                            </div>
+                        </div>
+                        <div class="tech-item" data-tech="js">
+                            <div class="tech-item-icon">
+                                <i class="fab fa-js"></i>
+                            </div>
+                            <div class="tech-item-content">
+                                <strong>JavaScript ES6+</strong>
+                                <span>Interactive features</span>
+                            </div>
+                        </div>
+                        <div class="tech-item" data-tech="icons">
+                            <div class="tech-item-icon">
+                                <i class="fas fa-icons"></i>
+                            </div>
+                            <div class="tech-item-content">
+                                <strong>Font Awesome 6.4</strong>
+                                <span>Icon library</span>
+                            </div>
+                        </div>
+                        <div class="tech-item" data-tech="fonts">
+                            <div class="tech-item-icon">
+                                <i class="fas fa-font"></i>
+                            </div>
+                            <div class="tech-item-content">
+                                <strong>Google Fonts</strong>
+                                <span>Inter & Space Grotesk</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Backend & IoT Category -->
                 <div class="tech-category">
-                    <h3><i class="fas fa-server"></i> Backend & IoT</h3>
+                    <div class="tech-category-header">
+                        <div class="tech-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div class="tech-header-content">
+                            <h3>Backend & IoT</h3>
+                            <p class="tech-description">Server & hardware infrastructure</p>
+                        </div>
+                    </div>
                     <div class="tech-items">
-                        <div class="tech-item"><i class="fas fa-microchip"></i> NodeMCU ESP8266</div>
-                        <div class="tech-item"><i class="fas fa-wifi"></i> RFID RC522</div>
-                        <div class="tech-item"><i class="fab fa-google"></i> Google Sheets API</div>
+                        <div class="tech-item" data-tech="esp8266">
+                            <div class="tech-item-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <div class="tech-item-content">
+                                <strong>ESP8266 NodeMCU</strong>
+                                <span>Wi-Fi microcontroller</span>
+                            </div>
+                        </div>
+                        <div class="tech-item" data-tech="rfid">
+                            <div class="tech-item-icon">
+                                <i class="fas fa-wifi"></i>
+                            </div>
+                            <div class="tech-item-content">
+                                <strong>MFRC522 RFID</strong>
+                                <span>13.56MHz card reader</span>
+                            </div>
+                        </div>
+                        <div class="tech-item" data-tech="lcd">
+                            <div class="tech-item-icon">
+                                <i class="fas fa-tv"></i>
+                            </div>
+                            <div class="tech-item-content">
+                                <strong>LCD I2C 16x2</strong>
+                                <span>Display interface</span>
+                            </div>
+                        </div>
+                        <div class="tech-item" data-tech="php">
+                            <div class="tech-item-icon">
+                                <i class="fab fa-php"></i>
+                            </div>
+                            <div class="tech-item-content">
+                                <strong>PHP 8.0+</strong>
+                                <span>Server-side logic</span>
+                            </div>
+                        </div>
+                        <div class="tech-item" data-tech="mysql">
+                            <div class="tech-item-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div class="tech-item-content">
+                                <strong>MySQL/MariaDB</strong>
+                                <span>Database system</span>
+                            </div>
+                        </div>
+                        <div class="tech-item" data-tech="security">
+                            <div class="tech-item-icon">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="tech-item-content">
+                                <strong>Bcrypt</strong>
+                                <span>Password hashing</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Analytics Category -->
                 <div class="tech-category">
-                    <h3><i class="fas fa-chart-area"></i> Analytics</h3>
+                    <div class="tech-category-header">
+                        <div class="tech-icon">
+                            <i class="fas fa-chart-area"></i>
+                        </div>
+                        <div class="tech-header-content">
+                            <h3>Analytics</h3>
+                            <p class="tech-description">Data visualization & insights</p>
+                        </div>
+                    </div>
                     <div class="tech-items">
-                        <div class="tech-item"><i class="fas fa-chart-line"></i> Google Charts</div>
-                        <div class="tech-item"><i class="fas fa-table"></i> Data Visualization</div>
-                        <div class="tech-item"><i class="fas fa-calendar"></i> Calendar Heatmaps</div>
+                        <div class="tech-item" data-tech="chartjs">
+                            <div class="tech-item-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="tech-item-content">
+                                <strong>Chart.js</strong>
+                                <span>Interactive charts</span>
+                            </div>
+                        </div>
+                        <div class="tech-item" data-tech="dataviz">
+                            <div class="tech-item-icon">
+                                <i class="fas fa-chart-pie"></i>
+                            </div>
+                            <div class="tech-item-content">
+                                <strong>Data Visualization</strong>
+                                <span>Real-time analytics</span>
+                            </div>
+                        </div>
+                        <div class="tech-item" data-tech="calendar">
+                            <div class="tech-item-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="tech-item-content">
+                                <strong>Calendar Heatmaps</strong>
+                                <span>Attendance patterns</span>
+                            </div>
+                        </div>
+                        <div class="tech-item" data-tech="export">
+                            <div class="tech-item-icon">
+                                <i class="fas fa-file-export"></i>
+                            </div>
+                            <div class="tech-item-content">
+                                <strong>Export Reports</strong>
+                                <span>CSV & Excel formats</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

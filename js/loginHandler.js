@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // const usernameInput = document.getElementById('username'); // Already defined above
             const passwordInput = document.getElementById('password');
-            const btn = loginForm.querySelector('.btn-login-submit');
+            const btn = loginForm.querySelector('.btn-submit');
             const originalBtnContent = btn.innerHTML;
 
             const username = usernameInput.value.trim();
