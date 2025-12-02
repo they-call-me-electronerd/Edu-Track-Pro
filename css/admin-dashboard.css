@@ -45,6 +45,16 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 8px;
+}
+
+.sidebar.collapsed .sidebar-header {
+    justify-content: center;
+    padding: 14px 8px;
+}
+
+.sidebar.collapsed .logo {
+    display: none;
 }
 
 .sidebar-toggle {
@@ -291,7 +301,7 @@ body {
 /* Content Grid */
 .content-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 2.5fr 1fr;
     gap: 14px;
 }
 
@@ -442,7 +452,7 @@ body {
 .table-responsive {
     overflow-x: auto;
     overflow-y: auto;
-    max-height: 420px;
+    max-height: 500px;
     border-radius: 8px;
 }
 
@@ -472,7 +482,7 @@ body {
 }
 
 .table th, .table td {
-    padding: 8px 8px;
+    padding: 14px 12px;
     text-align: left;
     border-bottom: 1px solid var(--border-color);
     white-space: nowrap;
@@ -483,7 +493,7 @@ body {
 .table th {
     color: var(--text-light);
     font-weight: 600;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     position: sticky;
@@ -495,7 +505,7 @@ body {
 
 .table td {
     color: var(--text-dark);
-    font-size: 0.82rem;
+    font-size: 0.9rem;
 }
 
 /* Specific column widths for better responsiveness */
