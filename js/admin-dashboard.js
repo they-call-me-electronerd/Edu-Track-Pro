@@ -337,23 +337,21 @@ function processAdminData(students, logs) {
         });
     }
 
-    // Populate Recent Activity (All Records)
+    // Populate Recent Activity (Today's Records Only)
     const recentTableBody = document.getElementById('recentActivityTable');
     recentTableBody.innerHTML = '';
     
-    // Sort logs by date (descending) and then by check-in time (descending)
-    const sortedLogs = [...allLogs].sort((a, b) => {
-        // Compare dates first
-        const dateCompare = b.date.localeCompare(a.date);
-        if (dateCompare !== 0) return dateCompare;
-        
-        // If same date, compare by check-in time (most recent first)
+    // Filter logs for today only
+    const todayLogs = allLogs.filter(log => log.date === todayStr);
+    
+    // Sort today's logs by check-in time (descending - most recent first)
+    const sortedTodayLogs = [...todayLogs].sort((a, b) => {
         const timeA = a.checkIn !== '-' ? a.checkIn : '00:00:00';
         const timeB = b.checkIn !== '-' ? b.checkIn : '00:00:00';
         return timeB.localeCompare(timeA);
     });
     
-    sortedLogs.forEach((log, index) => {
+    sortedTodayLogs.forEach((log, index) => {
         const tr = document.createElement('tr');
         const studentInfo = studentMap[log.roll] || {};
         const address = studentInfo.address || 'N/A';
