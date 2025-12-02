@@ -56,9 +56,9 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);    // LCD address 0x27, 16 cols x 2 rows
 #define WIFI_LED  LED_BUILTIN         // On-board LED (active LOW on many boards)
 
 // PHP API Configuration (Change this to your server's IP address)
-const char* serverHost = "192.168.1.100";  // Replace with your XAMPP server IP
+const char* serverHost = "http://edutrackpro.zenithkandel.com.np";  // Replace with your XAMPP server IP
 const int   serverPort = 80;               // HTTP port
-const char* apiEndpoint = "/projects/iot/IoT-RFID-Attendance-System-/API/rfid-checkin.php";
+const char* apiEndpoint = "/API/rfid-checkin.php";
 
 WiFiClient wifiClient;
 HTTPClient http;
