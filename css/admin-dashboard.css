@@ -12,7 +12,7 @@ body {
 
 /* Sidebar */
 .sidebar {
-    width: 260px;
+    width: 220px;
     background: var(--bg-card);
     border-right: 1px solid var(--border-color);
     display: flex;
@@ -131,7 +131,7 @@ body {
 /* Main Content */
 .main-content {
     flex: 1;
-    margin-left: 260px;
+    margin-left: 220px;
     padding: 20px 30px;
     transition: all 0.3s ease;
 }
@@ -462,18 +462,22 @@ body {
 .table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
 }
 
 .table th, .table td {
-    padding: 12px 15px;
+    padding: 12px 10px;
     text-align: left;
     border-bottom: 1px solid var(--border-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .table th {
     color: var(--text-light);
     font-weight: 500;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     position: sticky;
@@ -485,7 +489,35 @@ body {
 
 .table td {
     color: var(--text-dark);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+}
+
+/* Specific column widths for better responsiveness */
+.table th:nth-child(1), .table td:nth-child(1) { width: 5%; text-align: center; } /* S.N. */
+.table th:nth-child(2), .table td:nth-child(2) { width: 10%; } /* Date */
+.table th:nth-child(3), .table td:nth-child(3) { width: 17%; } /* Student */
+.table th:nth-child(4), .table td:nth-child(4) { width: 12%; } /* Roll No */
+.table th:nth-child(5), .table td:nth-child(5) { width: 11%; } /* Check-In */
+.table th:nth-child(6), .table td:nth-child(6) { width: 11%; } /* Check-Out */
+.table th:nth-child(7), .table td:nth-child(7) { width: 34%; } /* Address */
+
+/* Recent Activity table without Date column */
+.recent-activity-table th:nth-child(1), .recent-activity-table td:nth-child(1) { width: 6%; text-align: center; } /* S.N. */
+.recent-activity-table th:nth-child(2), .recent-activity-table td:nth-child(2) { width: 20%; } /* Student */
+.recent-activity-table th:nth-child(3), .recent-activity-table td:nth-child(3) { width: 14%; } /* Roll No */
+.recent-activity-table th:nth-child(4), .recent-activity-table td:nth-child(4) { width: 12%; } /* Check-In */
+.recent-activity-table th:nth-child(5), .recent-activity-table td:nth-child(5) { width: 12%; } /* Check-Out */
+.recent-activity-table th:nth-child(6), .recent-activity-table td:nth-child(6) { width: 36%; } /* Address */
+
+/* Adjust for collapsed sidebar */
+.main-content.expanded .table th,
+.main-content.expanded .table td {
+    padding: 12px 8px;
+    font-size: 0.85rem;
+}
+
+.main-content.expanded .table th {
+    font-size: 0.75rem;
 }
 
 .table tr:last-child td {
