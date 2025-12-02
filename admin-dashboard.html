@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Edu Track Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin-dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="admin-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-fingerprint"></i> <span>Edu Track</span>
+                </a>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="active" data-target="dashboard">
+                    <a href="#"><i class="fas fa-th-large"></i> <span>Dashboard</span></a>
+                </li>
+                <li data-target="logs">
+                    <a href="#"><i class="fas fa-history"></i> <span>Attendance Logs</span></a>
+                </li>
+                <li data-target="manage-users">
+                    <a href="#"><i class="fas fa-user-graduate"></i> <span>Manage Students</span></a>
+                </li>
+                <li data-target="reports">
+                    <a href="#"><i class="fas fa-chart-pie"></i> <span>Reports</span></a>
+                </li>
+                <li data-target="change-password">
+                    <a href="#"><i class="fas fa-key"></i> <span>Change Password</span></a>
+                </li>
+            </ul>
+            <div class="sidebar-footer">
+                <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Topbar -->
+            <header class="topbar">
+                <div class="mobile-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="page-title">
+                    <h2 id="pageTitle">Dashboard</h2>
+                    <p id="currentDate">Loading date...</p>
+                </div>
+                <div class="topbar-actions">
+                    <button id="themeToggle" class="theme-btn">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <div class="admin-profile">
+                        <div class="avatar">A</div>
+                        <span>Admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="section active">
+                <div class="stats-grid">
+                    <div class="stat-box total">
+                        <div class="stat-icon"><i class="fas fa-users"></i></div>
+                        <div class="stat-info">
+                            <h3>Total Students</h3>
+                            <div class="value" id="totalStudents">--</div>
+                        </div>
+                    </div>
+                    <div class="stat-box present">
+                        <div class="stat-icon"><i class="fas fa-user-check"></i></div>
+                        <div class="stat-info">
+                            <h3>Present Today</h3>
+                            <div class="value" id="presentToday">--</div>
+                        </div>
+                    </div>
+                    <div class="stat-box absent">
+                        <div class="stat-icon"><i class="fas fa-user-times"></i></div>
+                        <div class="stat-info">
+                            <h3>Absent Today</h3>
+                            <div class="value" id="absentToday">--</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-grid">
+                    <div class="card recent-activity">
+                        <div class="card-header">
+                            <h3><span class="live-indicator"></span> Recent Activity</h3>
+                            <div class="header-actions">
+                                <div class="auto-refresh-toggle">
+                                    <label class="toggle-label">
+                                        <span class="toggle-text">Auto Refresh</span>
+                                        <input type="checkbox" id="autoRefreshToggle" class="toggle-checkbox">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <button class="btn-sm" onclick="refreshData()"><i class="fas fa-sync-alt"></i></button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>Student Name</th>
+                                        <th>Roll No</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recentActivityTable">
+                                    <!-- Data will be populated here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="card quick-stats">
+                        <div class="card-header">
+                            <h3><i class="fas fa-user-times"></i> Absent Students Today</h3>
+                        </div>
+                        <div class="absent-students-container">
+                            <div id="absentStudentsList" class="absent-list">
+                                <!-- Absent students will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Logs Section -->
+            <section id="logs" class="section">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-list-alt"></i> Full Attendance Logs</h3>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <button id="filterBtn" class="btn-filter">
+                                <i class="fas fa-filter"></i> Filters
+                            </button>
+                            <div class="search-box">
+                                <i class="fas fa-search"></i>
+                                <input type="text" id="logSearch" placeholder="Search logs...">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="activeFilters" class="active-filters">
+                        <!-- Filter chips will appear here -->
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Check In</th>
+                                    <th>Check Out</th>
+                                    <th>Student Name</th>
+                                    <th>Roll No</th>
+                                    <th>Class</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="fullLogsTable">
+                                <!-- Data will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Manage Students Section -->
+            <section id="manage-users" class="section">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-user-graduate"></i> Student Management</h3>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <div class="search-box">
+                                <i class="fas fa-search"></i>
+                                <input type="text" id="manageUsersSearch" placeholder="Search students...">
+                            </div>
+                            <button id="btnAddStudent" class="btn-primary">
+                                <i class="fas fa-user-plus"></i> Add New Student
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="manageUsersGrid" class="students-grid">
+                        <!-- Student cards will be populated here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Change Password Section -->
+            <section id="change-password" class="section">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-key"></i> Change Password</h3>
+                    </div>
+                    <div style="max-width: 500px; margin: 20px auto; padding: 20px;">
+                        <form id="changePasswordForm">
+                            <div class="filter-group">
+                                <label for="currentPassword">Current Password <span style="color: red;">*</span></label>
+                                <input type="password" id="currentPassword" class="filter-input" placeholder="Enter current password" required />
+                            </div>
+                            <div class="filter-group">
+                                <label for="newPassword">New Password <span style="color: red;">*</span></label>
+                                <input type="password" id="newPassword" class="filter-input" placeholder="Enter new password" required />
+                            </div>
+                            <div class="filter-group">
+                                <label for="confirmPassword">Confirm New Password <span style="color: red;">*</span></label>
+                                <input type="password" id="confirmPassword" class="filter-input" placeholder="Re-enter new password" required />
+                            </div>
+                            <div style="margin-top: 30px; display: flex; gap: 10px;">
+                                <button type="submit" class="btn-primary" style="flex: 1;">
+                                    <i class="fas fa-check"></i> Update Password
+                                </button>
+                                <button type="button" class="btn-secondary" onclick="resetPasswordForm()" style="flex: 1;">
+                                    <i class="fas fa-times"></i> Cancel
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reports Section -->
+            <section id="reports" class="section">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-line"></i> Analytics & Insights</h3>
+                    </div>
+                    
+                    <!-- Charts Container -->
+                    <div class="charts-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; margin-bottom: 30px; padding: 10px;">
+                        <div class="chart-wrapper" style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1);">
+                            <h4 style="margin-bottom: 15px; color: var(--text-secondary);">Attendance Trends (Last 7 Days)</h4>
+                            <div style="position: relative; height: 300px; width: 100%;">
+                                <canvas id="attendanceTrendChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper" style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1);">
+                            <h4 style="margin-bottom: 15px; color: var(--text-secondary);">Class Participation Today</h4>
+                            <div style="position: relative; height: 300px; width: 100%;">
+                                <canvas id="classDistributionChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-header">
+                        <h3><i class="fas fa-table"></i> Class Performance Summary</h3>
+                    </div>
+                    <div class="table-responsive" style="margin-bottom: 30px;">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Class</th>
+                                    <th>Total Students</th>
+                                    <th>Present Today</th>
+                                    <th>Attendance Rate</th>
+                                </tr>
+                            </thead>
+                            <tbody id="classSummaryTable">
+                                <!-- Data will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="card-header">
+                        <h3><i class="fas fa-file-export"></i> Reports & Exports</h3>
+                    </div>
+                    <div class="reports-grid">
+                        <div class="report-card">
+                            <i class="fas fa-file-csv"></i>
+                            <h4>Daily Attendance Report</h4>
+                            <p>Download today's attendance data.</p>
+                            <button id="btnDownloadDaily" class="btn-primary">Download CSV</button>
+                        </div>
+                        <div class="report-card">
+                            <i class="fas fa-file-excel"></i>
+                            <h4>Monthly Summary</h4>
+                            <p>Attendance summary for the current month.</p>
+                            <button id="btnDownloadMonthly" class="btn-primary">Download Excel</button>
+                        </div>
+                        <div class="report-card">
+                            <i class="fas fa-user-slash"></i>
+                            <h4>Absentees List</h4>
+                            <p>List of students absent today.</p>
+                            <button id="btnViewAbsentees" class="btn-primary">View List</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Filter Modal -->
+    <div id="filterModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-filter"></i> Filter Attendance Logs</h3>
+                <button class="modal-close" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="filter-group">
+                    <label for="filterDateFrom">Date From</label>
+                    <input type="date" id="filterDateFrom" class="filter-input">
+                </div>
+                <div class="filter-group">
+                    <label for="filterDateTo">Date To</label>
+                    <input type="date" id="filterDateTo" class="filter-input">
+                </div>
+                <div class="filter-group">
+                    <label for="filterClass">Class</label>
+                    <select id="filterClass" class="filter-input">
+                        <option value="">All Classes</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="clearFilters" class="btn-secondary">Clear All</button>
+                <button id="applyFilters" class="btn-primary">Apply Filters</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Student Modal -->
+    <div id="addStudentModal" class="modal" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-user-plus"></i> Add New Student</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addStudentForm">
+                    <div class="filter-group">
+                        <label for="addUID">UID <span style="color: red;">*</span></label>
+                        <input id="addUID" class="filter-input" placeholder="e.g., 54:83:DE:A4" required />
+                    </div>
+                    <div class="filter-group">
+                        <label for="addName">Name <span style="color: red;">*</span></label>
+                        <input id="addName" class="filter-input" placeholder="Enter full name" required />
+                    </div>
+                    <div class="filter-group">
+                        <label for="addRoll">Roll No <span style="color: red;">*</span></label>
+                        <input id="addRoll" type="number" class="filter-input" placeholder="Enter roll number" required />
+                    </div>
+                    <div class="filter-group">
+                        <label for="addClass">Class <span style="color: red;">*</span></label>
+                        <input id="addClass" class="filter-input" placeholder="e.g., M-5, D-7" required />
+                    </div>
+                    <div class="filter-group">
+                        <label for="addAddress">Address</label>
+                        <input id="addAddress" class="filter-input" placeholder="Enter address" />
+                    </div>
+                    <div class="filter-group">
+                        <label for="addPassword">Password <span style="color: red;">*</span></label>
+                        <input id="addPassword" type="password" class="filter-input" placeholder="Create password" required />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelAddStudent" class="btn-secondary">Cancel</button>
+                <button id="saveAddStudent" class="btn-primary">Add Student</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Student Modal -->
+    <div id="editStudentModal" class="modal" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-user-edit"></i> Edit Student</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editStudentForm">
+                    <input type="hidden" id="editStudentId">
+                    <div class="filter-group">
+                        <label for="editUID">UID</label>
+                        <input id="editUID" class="filter-input" />
+                    </div>
+                    <div class="filter-group">
+                        <label for="editName">Name</label>
+                        <input id="editName" class="filter-input" />
+                    </div>
+                    <div class="filter-group">
+                        <label for="editRoll">Roll No</label>
+                        <input id="editRoll" class="filter-input" />
+                    </div>
+                    <div class="filter-group">
+                        <label for="editClass">Class</label>
+                        <input id="editClass" class="filter-input" />
+                    </div>
+                    <div class="filter-group">
+                        <label for="editAddress">Address</label>
+                        <input id="editAddress" class="filter-input" />
+                    </div>
+                    <div class="filter-group">
+                        <label for="editPassword">New Password (leave blank to keep current)</label>
+                        <input id="editPassword" type="password" class="filter-input" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelEditStudent" class="btn-secondary">Cancel</button>
+                <button id="saveEditStudent" class="btn-primary">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin-dashboard.js"></script>
+</body>
+</html>
