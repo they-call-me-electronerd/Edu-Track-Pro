@@ -353,7 +353,7 @@ function processAdminData(students, logs) {
         return timeB.localeCompare(timeA);
     });
     
-    sortedLogs.forEach(log => {
+    sortedLogs.forEach((log, index) => {
         const tr = document.createElement('tr');
         const studentInfo = studentMap[log.roll] || {};
         const address = studentInfo.address || 'N/A';
@@ -361,7 +361,7 @@ function processAdminData(students, logs) {
         const checkOut = log.checkOut && log.checkOut !== '-' ? log.checkOut : 'N/A';
         
         tr.innerHTML = `
-            <td>${log.date}</td>
+            <td>${index + 1}</td>
             <td>${log.name}</td>
             <td>${log.roll}</td>
             <td>${checkIn}</td>
@@ -941,11 +941,11 @@ function populateLogsTable(logs) {
     tbody.innerHTML = '';
     
     if (logs.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 40px; color: var(--text-light);">No records found</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 40px; color: var(--text-light);">No records found</td></tr>';
         return;
     }
     
-    logs.forEach(log => {
+    logs.forEach((log, index) => {
         const studentInfo = globalStudentMap[log.roll] || {};
         const address = studentInfo.address || 'N/A';
         const checkIn = log.checkIn || 'N/A';
@@ -953,6 +953,7 @@ function populateLogsTable(logs) {
         
         const row = document.createElement('tr');
         row.innerHTML = `
+            <td>${index + 1}</td>
             <td>${log.date}</td>
             <td>${log.name}</td>
             <td>${log.roll}</td>
