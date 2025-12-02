@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Test - Edu Track Pro</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #0f0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            border: 2px solid #0f0;
+            border-radius: 10px;
+            padding: 30px;
+        }
+        h1, h2 { color: #0ff; margin-bottom: 20px; }
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #111;
+            border-left: 4px solid #0f0;
+        }
+        .login-form {
+            display: grid;
+            gap: 15px;
+            max-width: 500px;
+        }
+        input, button {
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #0f0;
+            background: #000;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+        }
+        button {
+            cursor: pointer;
+            background: #0f0;
+            color: #000;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        button:hover { background: #0ff; }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border: 2px solid #555;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .success { color: #0f0; }
+        .error { color: #f00; }
+        .info { color: #ff0; }
+        .quick-login {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+        .quick-btn {
+            padding: 8px 15px;
+            font-size: 14px;
+            background: #333;
+            border: 1px solid #0f0;
+        }
+        pre {
+            background: #000;
+            padding: 10px;
+            overflow-x: auto;
+            border: 1px solid #0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Login System Test</h1>
+        
+        <div class="test-section">
+            <h2>Quick Login (Click to Auto-Fill)</h2>
+            <div class="quick-login">
+                <button class="quick-btn" onclick="quickLogin('87638915', 'student123')">Student: Amrit Panthi</button>
+                <button class="quick-btn" onclick="quickLogin('86183295', 'student123')">Student: Sakshyam</button>
+                <button class="quick-btn" onclick="quickLogin('84791362', 'student123')">Student: Sumitra</button>
+                <button class="quick-btn" onclick="quickLogin('admin', 'admin123')">Admin</button>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>Manual Login Test</h2>
+            <div class="login-form">
+                <input type="text" id="username" placeholder="Username or Roll Number">
+                <input type="password" id="password" placeholder="Password">
+                <button onclick="testLogin()">Test Login</button>
+            </div>
+            <div id="loginResult" class="result"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>API Direct Test</h2>
+            <button onclick="testAPIConnection()">Test API Connection</button>
+            <div id="apiResult" class="result"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>Session Status</h2>
+            <button onclick="checkSession()">Check Current Session</button>
+            <button onclick="clearSession()">Clear Session</button>
+            <div id="sessionResult" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        function log(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            const timestamp = new Date().toLocaleTimeString();
+            const className = type === 'error' ? 'error' : type === 'success' ? 'success' : 'info';
+            element.innerHTML += `<span class="${className}">[${timestamp}] ${message}</span>\n`;
+            element.scrollTop = element.scrollHeight;
+        }
+
+        function clearLog(elementId) {
+            document.getElementById(elementId).innerHTML = '';
+        }
+
+        function quickLogin(username, password) {
+            document.getElementById('username').value = username;
+            document.getElementById('password').value = password;
+            testLogin();
+        }
+
+        async function testLogin() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            
+            if (!username || !password) {
+                alert('Please enter both username and password');
+                return;
+            }
+
+            clearLog('loginResult');
+            log('loginResult', `Testing login for: ${username}`, 'info');
+            
+            try {
+                const response = await fetch('API/login.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password
+                    })
+                });
+
+                log('loginResult', `Response Status: ${response.status} ${response.statusText}`, 'info');
+
+                const result = await response.json();
+                log('loginResult', `Response Data:\n${JSON.stringify(result, null, 2)}`, 'info');
+
+                if (result.success) {
+                    log('loginResult', '✓ LOGIN SUCCESSFUL!', 'success');
+                    
+                    // Store session data
+                    sessionStorage.setItem('isLoggedIn', 'true');
+                    sessionStorage.setItem('userRole', result.data.role);
+                    
+                    if (result.data.role === 'admin') {
+                        sessionStorage.setItem('username', result.data.username);
+                        log('loginResult', 'Redirecting to admin-dashboard.html in 2 seconds...', 'success');
+                        setTimeout(() => {
+                            window.location.href = 'admin-dashboard.html';
+                        }, 2000);
+                    } else if (result.data.role === 'student') {
+                        sessionStorage.setItem('studentId', result.data.roll);
+                        sessionStorage.setItem('studentName', result.data.name);
+                        sessionStorage.setItem('studentClass', result.data.class);
+                        log('loginResult', `Student Data Stored:
+- Roll: ${result.data.roll}
+- Name: ${result.data.name}
+- Class: ${result.data.class}`, 'success');
+                        log('loginResult', 'Redirecting to student-dashboard.html in 2 seconds...', 'success');
+                        setTimeout(() => {
+                            window.location.href = 'student-dashboard.html';
+                        }, 2000);
+                    }
+                } else {
+                    log('loginResult', `✗ LOGIN FAILED: ${result.message}`, 'error');
+                }
+
+            } catch (error) {
+                log('loginResult', `✗ ERROR: ${error.message}`, 'error');
+                log('loginResult', `Stack: ${error.stack}`, 'error');
+            }
+        }
+
+        async function testAPIConnection() {
+            clearLog('apiResult');
+            log('apiResult', 'Testing API endpoint...', 'info');
+            
+            try {
+                const response = await fetch('API/login.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: 'test',
+                        password: 'test'
+                    })
+                });
+
+                log('apiResult', `✓ API is reachable (Status: ${response.status})`, 'success');
+                const result = await response.json();
+                log('apiResult', `Response:\n${JSON.stringify(result, null, 2)}`, 'info');
+
+            } catch (error) {
+                log('apiResult', `✗ API Connection Failed: ${error.message}`, 'error');
+            }
+        }
+
+        function checkSession() {
+            clearLog('sessionResult');
+            log('sessionResult', '=== Current Session Data ===', 'info');
+            
+            const keys = ['isLoggedIn', 'userRole', 'username', 'studentId', 'studentName', 'studentClass'];
+            
+            keys.forEach(key => {
+                const value = sessionStorage.getItem(key);
+                if (value) {
+                    log('sessionResult', `${key}: ${value}`, 'success');
+                } else {
+                    log('sessionResult', `${key}: (not set)`, 'info');
+                }
+            });
+            
+            log('sessionResult', '\n=== Local Storage ===', 'info');
+            const localKeys = ['rememberedUsername', 'theme', 'loginTheme'];
+            localKeys.forEach(key => {
+                const value = localStorage.getItem(key);
+                if (value) {
+                    log('sessionResult', `${key}: ${value}`, 'success');
+                }
+            });
+        }
+
+        function clearSession() {
+            sessionStorage.clear();
+            localStorage.removeItem('rememberedUsername');
+            clearLog('sessionResult');
+            log('sessionResult', '✓ Session cleared!', 'success');
+        }
+
+        // Auto-check session on load
+        window.addEventListener('load', () => {
+            checkSession();
+        });
+    </script>
+</body>
+</html>

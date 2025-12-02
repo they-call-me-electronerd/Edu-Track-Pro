@@ -6,6 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const usernameInput = document.getElementById('username');
     const rememberMeCheckbox = document.getElementById('rememberMe');
 
+    // Reset login button state on page load
+    const loginBtn = loginForm?.querySelector('.btn-submit');
+    if (loginBtn) {
+        loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
+        loginBtn.style.opacity = '1';
+        loginBtn.disabled = false;
+    }
+
     // Check for saved username
     if (usernameInput) {
         const savedUsername = localStorage.getItem('rememberedUsername');

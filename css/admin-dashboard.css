@@ -135,14 +135,15 @@ body {
 .admin-profile {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     color: var(--text-dark);
     font-weight: 500;
+    font-size: 0.9rem;
 }
 
 .admin-profile .avatar {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     background: var(--primary-color);
     color: white;
     border-radius: 50%;
@@ -150,6 +151,7 @@ body {
     align-items: center;
     justify-content: center;
     font-weight: 700;
+    font-size: 0.9rem;
 }
 
 /* Sections */
@@ -214,6 +216,16 @@ body {
 .stat-box.absent .stat-icon {
     background: rgba(248, 113, 113, 0.1);
     color: var(--danger);
+}
+
+.stat-box.percentage .stat-icon {
+    background: rgba(255, 152, 0, 0.1);
+    color: var(--accent-color);
+}
+
+.percent-sign {
+    font-size: 1.2rem;
+    margin-left: 2px;
 }
 
 .stat-info h3 {
@@ -380,6 +392,28 @@ body {
 /* Tables */
 .table-responsive {
     overflow-x: auto;
+    overflow-y: auto;
+    max-height: 500px;
+    border-radius: 8px;
+}
+
+.table-responsive::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background: var(--bg-card);
+    border-radius: 4px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
 }
 
 .table {
@@ -399,6 +433,11 @@ body {
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    position: sticky;
+    top: 0;
+    background: var(--bg-card);
+    z-index: 10;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .table td {

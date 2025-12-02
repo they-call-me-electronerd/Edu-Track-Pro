@@ -473,6 +473,54 @@ body {
     display: block;
 }
 
+/* Back to Home button on login page */
+.btn-back {
+    position: absolute;
+    left: 18px;
+    top: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--text-light);
+    border: 1px solid rgba(255,255,255,0.06);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.18s ease;
+    z-index: 1500;
+}
+
+.btn-back i {
+    font-size: 0.95rem;
+}
+
+.btn-back:hover,
+.btn-back:focus {
+    background: rgba(255,255,255,0.04);
+    transform: translateY(-2px);
+    outline: none;
+}
+
+/* Hide the extra text but keep it for screen readers */
+.visually-hidden { 
+    position: absolute !important;
+    height: 1px; width: 1px; 
+    overflow: hidden; 
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap; 
+}
+
+@media (max-width: 480px) {
+    .btn-back {
+        left: 12px;
+        top: 12px;
+        padding: 8px;
+        border-radius: 8px;
+    }
+}
+
 /* ========================================
    FORM OPTIONS
    ======================================== */
