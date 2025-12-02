@@ -255,9 +255,11 @@ function processAdminData(students, logs) {
     if (isAutoRefreshing) {
         document.getElementById('presentToday').innerHTML = presentCount;
         document.getElementById('absentToday').innerHTML = absentCount;
+        document.getElementById('attendanceRate').innerHTML = attendanceRate + '<span class="percent-sign">%</span>';
     } else {
         animateValue(document.getElementById('presentToday'), 0, presentCount, 1000);
         animateValue(document.getElementById('absentToday'), 0, absentCount, 1000);
+        animateValue(document.getElementById('attendanceRate'), 0, attendanceRate, 1000, '%');
     }
 
     // Populate Absent Students List
@@ -313,7 +315,7 @@ function processAdminData(students, logs) {
         });
     }
 
-    // Populate Recent Activity (Top 5)
+    // Populate Recent Activity (All Records)
     const recentTableBody = document.getElementById('recentActivityTable');
     recentTableBody.innerHTML = '';
     
@@ -329,16 +331,19 @@ function processAdminData(students, logs) {
         return timeB.localeCompare(timeA);
     });
     
-    sortedLogs.slice(0, 5).forEach(log => {
+    sortedLogs.forEach(log => {
         const tr = document.createElement('tr');
-        const timeDisplay = log.checkOut && log.checkOut !== '-' 
-            ? `${log.checkIn} - ${log.checkOut}` 
-            : log.checkIn;
+        const studentInfo = studentMap[log.roll] || {};
+        const address = studentInfo.address || 'N/A';
+        const checkIn = log.checkIn !== '-' ? log.checkIn : 'N/A';
+        const checkOut = log.checkOut && log.checkOut !== '-' ? log.checkOut : 'N/A';
+        
         tr.innerHTML = `
-            <td>${timeDisplay}</td>
             <td>${log.name}</td>
             <td>${log.roll}</td>
-            <td><span style="color: var(--success); font-weight: 600;">${log.status}</span></td>
+            <td>${checkIn}</td>
+            <td>${checkOut}</td>
+            <td>${address}</td>
         `;
         recentTableBody.appendChild(tr);
     });
@@ -574,12 +579,13 @@ function updateCharts(logs, students) {
     }
 }
 
-function animateValue(obj, start, end, duration) {
+function animateValue(obj, start, end, duration, suffix = '') {
     let startTimestamp = null;
     const step = (timestamp) => {
         if (!startTimestamp) startTimestamp = timestamp;
         const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        obj.innerHTML = Math.floor(progress * (end - start) + start);
+        const currentValue = Math.floor(progress * (end - start) + start);
+        obj.innerHTML = suffix ? currentValue + '<span class="percent-sign">' + suffix + '</span>' : currentValue;
         if (progress < 1) {
             window.requestAnimationFrame(step);
         }
@@ -912,20 +918,23 @@ function populateLogsTable(logs) {
     tbody.innerHTML = '';
     
     if (logs.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 40px; color: var(--text-light);">No records found</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 40px; color: var(--text-light);">No records found</td></tr>';
         return;
     }
     
     logs.forEach(log => {
+        const studentInfo = globalStudentMap[log.roll] || {};
+        const address = studentInfo.address || 'N/A';
+        const checkIn = log.checkIn || 'N/A';
+        const checkOut = log.checkOut && log.checkOut !== '-' ? log.checkOut : 'N/A';
+        
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${log.date}</td>
-            <td>${log.checkIn || '-'}</td>
-            <td>${log.checkOut || '-'}</td>
             <td>${log.name}</td>
             <td>${log.roll}</td>
-            <td>${log.class}</td>
-            <td><span style="color: var(--success); font-weight: 600;">${log.status}</span></td>
+            <td>${checkIn}</td>
+            <td>${checkOut}</td>
+            <td>${address}</td>
         `;
         tbody.appendChild(row);
     });
