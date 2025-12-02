@@ -35,6 +35,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
+    // Desktop Sidebar Toggle
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const mainContent = document.querySelector('.main-content');
+    
+    // Load saved sidebar state
+    const sidebarCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+    if (sidebarCollapsed) {
+        sidebar.classList.add('collapsed');
+        mainContent.classList.add('expanded');
+    }
+    
+    if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('expanded');
+            
+            // Save state
+            const isCollapsed = sidebar.classList.contains('collapsed');
+            localStorage.setItem('sidebarCollapsed', isCollapsed);
+        });
+    }
+    
     // Fetch Data
     fetchAdminData();
 
@@ -339,6 +361,7 @@ function processAdminData(students, logs) {
         const checkOut = log.checkOut && log.checkOut !== '-' ? log.checkOut : 'N/A';
         
         tr.innerHTML = `
+            <td>${log.date}</td>
             <td>${log.name}</td>
             <td>${log.roll}</td>
             <td>${checkIn}</td>
@@ -918,7 +941,7 @@ function populateLogsTable(logs) {
     tbody.innerHTML = '';
     
     if (logs.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 40px; color: var(--text-light);">No records found</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 40px; color: var(--text-light);">No records found</td></tr>';
         return;
     }
     
@@ -930,6 +953,7 @@ function populateLogsTable(logs) {
         
         const row = document.createElement('tr');
         row.innerHTML = `
+            <td>${log.date}</td>
             <td>${log.name}</td>
             <td>${log.roll}</td>
             <td>${checkIn}</td>
