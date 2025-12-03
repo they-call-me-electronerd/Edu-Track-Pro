@@ -55,9 +55,9 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);    // LCD address 0x27, 16 cols x 2 rows
 #define BUTTON_PIN 0                  // D3 (GPIO0) - WiFi config / reset button
 #define WIFI_LED  LED_BUILTIN         // On-board LED (active LOW on many boards)
 
-// PHP API Configuration (Change this to your server's IP address)
-const char* serverHost = "http://edutrackpro.zenithkandel.com.np";  // Replace with your XAMPP server IP
-const int   serverPort = 80;               // HTTP port
+// PHP API Configuration (Change this to your server's IP address or domain! NO "http://")
+const char* serverHost = "edutrackpro.zenithkandel.com.np";  // Or your XAMPP IP (e.g., "192.168.1.100")
+const int   serverPort = 80;                                 // HTTP port
 const char* apiEndpoint = "/API/rfid-checkin.php";
 
 WiFiClient wifiClient;
@@ -154,16 +154,18 @@ void setup() {
     delay(1000);
   }
 
-  // Test connection to PHP API server
+  // Test connection to PHP API server (use host/domain ONLY—NO "http://")
   lcd.clear(); lcd.setCursor(0,0); lcd.print("Checking Server");
-  
+  Serial.print("Testing TCP connect to: "); Serial.println(serverHost); // debug
   WiFiClient testClient;
   if (testClient.connect(serverHost, serverPort)) {
     lcd.setCursor(0,1); lcd.print("Server OK");
     testClient.stop();
+    Serial.println("Server connection OK");
     delay(900);
   } else {
     lcd.setCursor(0,1); lcd.print("Server Fail");
+    Serial.println("Server connection FAIL");
     delay(900);
   }
 
@@ -181,6 +183,7 @@ void loop() {
     lcd.setCursor(0,0); lcd.print("WiFi Lost");
     lcd.setCursor(0,1); lcd.print("Reconnecting...");
     digitalWrite(WIFI_LED, HIGH); // OFF (active low)
+    Serial.println("WiFi lost, trying to reconnect...");
     delay(1000);
     return;
   }
@@ -190,6 +193,7 @@ void loop() {
     if (pressStart == 0) pressStart = millis();
     if (millis() - pressStart > 3000) {
       lcd.clear(); lcd.setCursor(0,0); lcd.print("Config Portal");
+      Serial.println("Starting config portal...");
       WiFiManager wm;
       wm.startConfigPortal("EduTrackPro-Config");
       // After config portal, restart to reinit modules
