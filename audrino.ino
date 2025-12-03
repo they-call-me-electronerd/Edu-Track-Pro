@@ -69,6 +69,7 @@ unsigned long lastScanTime = 0;
 unsigned long pressStart = 0;
 bool readyDisplayed = false;
 
+
 // RFID object
 MFRC522 mfrc522(SS_PIN, RST_PIN);
 
