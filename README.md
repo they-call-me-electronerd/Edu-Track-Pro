@@ -138,6 +138,6 @@ MIT License - see `LICENSE` for details.
 
 ---
 <p align="center">
-  <b>Made with ❤️ by Edu Track Pro Team</b><br>
+  <b>Made by sakshyam Bastakoti </b><br>
   © 2025 EDU TRACK PRO - All Rights Reserved
 </p>
