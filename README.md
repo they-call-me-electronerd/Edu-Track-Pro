@@ -5,6 +5,8 @@
 [![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)
 [![Arduino](https://img.shields.io/badge/Arduino-ESP8266-00979D?logo=arduino&logoColor=white)](https://www.arduino.cc/)
 
+**[Visit SastoMahango Live →](https://edutrackpro.gt.tc)**       *[edutrackpro.com](https://edutrackpro.gt.tc)*
+
 A production-ready IoT-based smart attendance management system that uses RFID technology to automate student attendance tracking with real-time analytics and comprehensive reporting. **Now updated to Version 2.0!**
 
 ## 🌟 Features
