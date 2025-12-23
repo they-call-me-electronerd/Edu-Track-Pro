@@ -73,6 +73,33 @@ bool readyDisplayed = false;
 // RFID object
 MFRC522 mfrc522(SS_PIN, RST_PIN);
 
+// ---------- WIFI MANAGER CALLBACKS ----------
+// Callback invoked when device enters AP config mode
+void configModeCallback(WiFiManager *myWiFiManager) {
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("WiFi Config Mode");
+  lcd.setCursor(0, 1);
+  // Display the actual AP SSID (IP is always 192.168.4.1 for ESP8266 AP mode)
+  lcd.print(myWiFiManager->getConfigPortalSSID());
+  Serial.println("Entered config mode");
+  Serial.print("AP IP: ");
+  Serial.println(WiFi.softAPIP());
+  Serial.print("AP SSID: ");
+  Serial.println(myWiFiManager->getConfigPortalSSID());
+}
+
+// Callback invoked when WiFi configuration is saved
+void saveConfigCallback() {
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Config Saved");
+  lcd.setCursor(0, 1);
+  lcd.print("Done");
+  Serial.println("Configuration saved successfully");
+  delay(1500);
+}
+
 // ---------- HELPER: small utilities ----------
 String byteToHex(byte val) {
   char buf[3];
@@ -143,15 +170,25 @@ void setup() {
 
   // WiFi config (autoConnect opens AP if no saved credentials)
   WiFiManager wm;
+  
+  // Register WiFiManager callbacks for visual feedback
+  wm.setAPCallback(configModeCallback);
+  wm.setSaveConfigCallback(saveConfigCallback);
+  
   lcd.clear(); lcd.setCursor(0,0); lcd.print("WiFi Setup...");
   if (!wm.autoConnect("EduTrackPro")) {
     // If fails, show message but keep trying (user can power-cycle)
     lcd.clear(); lcd.setCursor(0,0); lcd.print("WiFi Failed");
-    lcd.setCursor(0,1); lcd.print("Open AP");
+    lcd.setCursor(0,1); lcd.print("Hold 3s for AP");
     delay(2000);
   } else {
-    lcd.clear(); lcd.setCursor(0,0); lcd.print("WiFi Connected");
-    delay(1000);
+    // Successfully connected - show clear feedback
+    lcd.clear(); lcd.setCursor(0,0); lcd.print("Connected");
+    lcd.setCursor(0,1); lcd.print("Online");
+    Serial.println("WiFi connected successfully");
+    Serial.print("IP Address: ");
+    Serial.println(WiFi.localIP());
+    delay(1500);
   }
 
   // Test connection to PHP API server (use host/domain ONLY—NO "http://")
@@ -180,21 +217,49 @@ void loop() {
   // Check WiFi connection
   if (WiFi.status() != WL_CONNECTED) {
     lcd.clear();
-    lcd.setCursor(0,0); lcd.print("WiFi Lost");
-    lcd.setCursor(0,1); lcd.print("Reconnecting...");
+    lcd.setCursor(0,0); lcd.print("WiFi Lost!");
+    lcd.setCursor(0,1); lcd.print("Hold 3s for AP");
     digitalWrite(WIFI_LED, HIGH); // OFF (active low)
-    Serial.println("WiFi lost, trying to reconnect...");
+    Serial.println("WiFi lost! Hold button 3s for AP config mode.");
+    readyDisplayed = false;
     delay(1000);
+    
+    // Check if button is pressed while WiFi is disconnected
+    if (digitalRead(BUTTON_PIN) == LOW) {
+      if (pressStart == 0) pressStart = millis();
+      if (millis() - pressStart > 3000) {
+        lcd.clear();
+        lcd.setCursor(0,0); lcd.print("Entering Config..");
+        lcd.setCursor(0,1); lcd.print("Please wait...");
+        Serial.println("Entering config mode from disconnected state...");
+        delay(500);
+        
+        WiFiManager wm;
+        wm.setAPCallback(configModeCallback);
+        wm.setSaveConfigCallback(saveConfigCallback);
+        wm.startConfigPortal("EduTrackPro-Config");
+        // After config portal, restart to reinit modules
+        ESP.restart();
+      }
+    } else {
+      pressStart = 0;
+    }
     return;
   }
 
-  // Check long-press for WiFi config portal
+  // Check long-press for WiFi config portal (when already connected)
   if (digitalRead(BUTTON_PIN) == LOW) {
     if (pressStart == 0) pressStart = millis();
     if (millis() - pressStart > 3000) {
-      lcd.clear(); lcd.setCursor(0,0); lcd.print("Config Portal");
-      Serial.println("Starting config portal...");
+      lcd.clear();
+      lcd.setCursor(0,0); lcd.print("Entering Config..");
+      lcd.setCursor(0,1); lcd.print("Please wait...");
+      Serial.println("Starting config portal (long press detected)...");
+      delay(500);
+      
       WiFiManager wm;
+      wm.setAPCallback(configModeCallback);
+      wm.setSaveConfigCallback(saveConfigCallback);
       wm.startConfigPortal("EduTrackPro-Config");
       // After config portal, restart to reinit modules
       ESP.restart();
